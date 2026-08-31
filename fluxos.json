@@ -3,10 +3,10 @@
  "sobre": "Fonte da verdade do que a Júlia escreve. Edite a bolha no navegador, salve e rode `python3 _shared/qa/verificar_fluxos.py`: o que ficar vermelho é o que falta mudar no código pra alcançar este arquivo.",
  "exemplo": {
   "paciente": "Felipe Teste Camara",
-  "telefone": "38 99911-0509",
-  "telefone_fmt": "(38) 99911-0509",
-  "telefone_cru": "38999110509",
-  "telefone_e164": "5538999110509",
+  "telefone": "38 91234-0000",
+  "telefone_fmt": "(38) 91234-0000",
+  "telefone_cru": "38912340000",
+  "telefone_e164": "5538912340000",
   "primeiro_nome": "Felipe",
   "profissional": "Dr. Frederico",
   "local": "Clínica Gastrus",
@@ -183,7 +183,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "08:05",
-        "t": "👉🏼 Dr. Frederico · duvida\n\nContato: Felipe - 38 99911-0509",
+        "t": "👉🏼 Dr. Frederico · duvida\n\nContato: Felipe - 38 91234-0000",
         "f": "core"
        }
       ]
@@ -256,33 +256,33 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "14:03",
-        "t": "🔔 Paciente novo!\n- Local: Gastrus\n- Procedimento: Consulta\n- Horário combinado: segunda 31/08 às 15h30\n- Tipo: 💰 Particular - R$ 350\n\n- Paciente: Felipe Teste Camara\n- Telefone do paciente: 38 99911-0509\n\n📱 Contato no WhatsApp: Felipe - 38 99911-0509",
+        "t": "🔔 Paciente novo!\n- Local: Gastrus\n- Procedimento: Consulta\n- Horário combinado: segunda 31/08 às 15h30\n- Tipo: 💰 Particular - R$ 350\n\n- Paciente: Felipe Teste Camara\n- Telefone do paciente: 38 91234-0000\n\n📱 Contato no WhatsApp: Felipe - 38 91234-0000",
         "f": "n8n:Júlia · Atendente (V1)"
        },
        {
         "p": "grupo",
         "q": "Equipe",
         "h": "15:37",
-        "t": "/confirmar 38999110509 31/08 15:30 nome=Felipe Teste Camara modalidade=particular valor=350"
+        "t": "/confirmar 38912340000 31/08 15:30 nome=Felipe Teste Camara modalidade=particular valor=350"
        },
        {
         "p": "grupo",
         "q": "Júlia",
         "h": "15:37",
-        "t": "📋 Criado no Asa · confirmar envio?\n\nFelipe Teste Camara\n(38) 99911-0509\nSegunda 31/08 às 15:30\nConsulta · Particular R$ 350 · anúncio\nClínica Gastrus\n\nAsa #4412 · ✅ slot livre\nvalor R$ 400,00 · obs: particular, R$ 350\n\nResponda /confirmar 38999110509 -ok pra enviar, ou campo=valor pra ajustar.",
+        "t": "📋 Criado no Asa · confirmar envio?\n\nFelipe Teste Camara\n(38) 91234-0000\nSegunda 31/08 às 15:30\nConsulta · Particular R$ 350 · anúncio\nClínica Gastrus\n\nAsa #4412 · ✅ slot livre\nvalor R$ 400,00 · obs: particular, R$ 350\n\nResponda /confirmar 38912340000 -ok pra enviar, ou campo=valor pra ajustar.",
         "f": "n8n:Júlia · Comandos do grupo (V1)"
        },
        {
         "p": "grupo",
         "q": "Equipe",
         "h": "16:20",
-        "t": "/confirmar 38999110509 -ok"
+        "t": "/confirmar 38912340000 -ok"
        },
        {
         "p": "conversa",
         "q": "Júlia",
         "h": "16:20",
-        "t": "✅ Confirmado!\n\nFelipe Teste Camara - (38) 99911-0509\nConsulta com Dr. Frederico\nSegunda, 31/08 às 15:30.\n\n📍 Clínica Gastrus\nR. Eng. João Antônio Pimenta, 163 - Cidade Santa Maria, Montes Claros - MG\nhttps://share.google/KGSY0jmKyuOdFhg4k\n\nA equipe da Gastrus também vai te contatar para lembrar do horário ☺️\n\n*Os horários são pontuais, não atrase.* Deus abençoe 🙏🏻",
+        "t": "✅ Confirmado!\n\nFelipe Teste Camara - (38) 91234-0000\nConsulta com Dr. Frederico\nSegunda, 31/08 às 15:30.\n\n📍 Clínica Gastrus\nR. Eng. João Antônio Pimenta, 163 - Cidade Santa Maria, Montes Claros - MG\nhttps://share.google/KGSY0jmKyuOdFhg4k\n\nA equipe da Gastrus também vai te contatar para lembrar do horário ☺️\n\n*Os horários são pontuais, não atrase.* Deus abençoe 🙏🏻",
         "f": "v1comandos"
        },
        {
@@ -308,7 +308,7 @@
         "p": "conversa",
         "q": "Júlia",
         "h": "14:02",
-        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538999110509\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
+        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538912340000\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
         "f": "core",
         "k": "readback_agendamento"
        },
@@ -322,7 +322,7 @@
         "p": "conversa",
         "q": "Júlia",
         "h": "14:03",
-        "t": "✅ Confirmado!\n\nFelipe Teste Camara - 5538999110509\nConsulta com Dr. Frederico\nSegunda 31/08 às 15h30.\n\n📍 Clínica Gastrus\nR. Eng. João Antônio Pimenta, 163 - Cidade Santa Maria, Montes Claros - MG, 39400-105\n\nA equipe da clínica também vai te contatar para lembrar do horário ☺️\n\n*Os horários são pontuais, não atrase.* Deus abençoe 🙏🏻",
+        "t": "✅ Confirmado!\n\nFelipe Teste Camara - 5538912340000\nConsulta com Dr. Frederico\nSegunda 31/08 às 15h30.\n\n📍 Clínica Gastrus\nR. Eng. João Antônio Pimenta, 163 - Cidade Santa Maria, Montes Claros - MG, 39400-105\n\nA equipe da clínica também vai te contatar para lembrar do horário ☺️\n\n*Os horários são pontuais, não atrase.* Deus abençoe 🙏🏻",
         "f": "snippet:confirmado",
         "k": "msg_confirmado"
        },
@@ -330,7 +330,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "14:03",
-        "t": "✅ Agendado · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- Local: Clínica Gastrus\n- 💰 Particular: R$ 350,00 à vista ou R$ 400,00 no cartão\n- Na agenda: #4412\n\nContato: Felipe - 5538999110509",
+        "t": "✅ Agendado · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- Local: Clínica Gastrus\n- 💰 Particular: R$ 350,00 à vista ou R$ 400,00 no cartão\n- Na agenda: #4412\n\nContato: Felipe - 5538912340000",
         "f": "core",
         "k": "card_agendado"
        }
@@ -356,7 +356,7 @@
         "p": "conversa",
         "q": "Júlia",
         "h": "14:02",
-        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538999110509\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
+        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538912340000\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
         "f": "core",
         "k": "readback_agendamento"
        },
@@ -370,7 +370,7 @@
         "p": "conversa",
         "q": "Júlia",
         "h": "14:03",
-        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Terça 01/09 às 14h\n- Paciente: Felipe Teste Camara | 5538999110509\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
+        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Terça 01/09 às 14h\n- Paciente: Felipe Teste Camara | 5538912340000\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
         "f": "core",
         "k": "readback_agendamento"
        },
@@ -384,7 +384,7 @@
         "p": "conversa",
         "q": "Júlia",
         "h": "14:04",
-        "t": "✅ Confirmado!\n\nFelipe Teste Camara - 5538999110509\nConsulta com Dr. Frederico\nTerça 01/09 às 14h.\n\n📍 Clínica Gastrus\nR. Eng. João Antônio Pimenta, 163 - Cidade Santa Maria, Montes Claros - MG, 39400-105\n\nA equipe da clínica também vai te contatar para lembrar do horário ☺️\n\n*Os horários são pontuais, não atrase.* Deus abençoe 🙏🏻",
+        "t": "✅ Confirmado!\n\nFelipe Teste Camara - 5538912340000\nConsulta com Dr. Frederico\nTerça 01/09 às 14h.\n\n📍 Clínica Gastrus\nR. Eng. João Antônio Pimenta, 163 - Cidade Santa Maria, Montes Claros - MG, 39400-105\n\nA equipe da clínica também vai te contatar para lembrar do horário ☺️\n\n*Os horários são pontuais, não atrase.* Deus abençoe 🙏🏻",
         "f": "snippet:confirmado",
         "k": "msg_confirmado"
        },
@@ -392,7 +392,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "14:04",
-        "t": "✅ Agendado · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Terça 01/09 às 14h\n- Local: Clínica Gastrus\n- 💰 Particular: R$ 350,00 à vista ou R$ 400,00 no cartão\n- Na agenda: #4413\n\nContato: Felipe - 5538999110509",
+        "t": "✅ Agendado · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Terça 01/09 às 14h\n- Local: Clínica Gastrus\n- 💰 Particular: R$ 350,00 à vista ou R$ 400,00 no cartão\n- Na agenda: #4413\n\nContato: Felipe - 5538912340000",
         "f": "core",
         "k": "card_agendado"
        }
@@ -419,7 +419,7 @@
         "p": "conversa",
         "q": "Júlia",
         "h": "14:02",
-        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538999110509\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
+        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538912340000\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
         "f": "core",
         "k": "readback_agendamento"
        },
@@ -440,7 +440,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "14:03",
-        "t": "🔴 Horário ocupado na agenda · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- 💰 R$ 350,00 à vista ou R$ 400,00 no cartão\n- Motivo: 15:30 ocupado (Maria S., agendado)\n\nContato: Felipe - 5538999110509",
+        "t": "🔴 Horário ocupado na agenda · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- 💰 R$ 350,00 à vista ou R$ 400,00 no cartão\n- Motivo: 15:30 ocupado (Maria S., agendado)\n\nContato: Felipe - 5538912340000",
         "f": "core",
         "k": "card_ocupado"
        },
@@ -448,7 +448,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "14:03",
-        "t": "/confirmar 5538999110509 31/08 15:30",
+        "t": "/confirmar 5538912340000 31/08 15:30",
         "f": "core"
        }
       ]
@@ -474,7 +474,7 @@
         "p": "conversa",
         "q": "Júlia",
         "h": "14:02",
-        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538999110509\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
+        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538912340000\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
         "f": "core",
         "k": "readback_agendamento"
        },
@@ -495,7 +495,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "14:03",
-        "t": "🔴 NÃO entrou na agenda · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- 💰 R$ 350,00 à vista ou R$ 400,00 no cartão\n- Motivo: login falhou\n\nContato: Felipe - 5538999110509",
+        "t": "🔴 NÃO entrou na agenda · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- 💰 R$ 350,00 à vista ou R$ 400,00 no cartão\n- Motivo: login falhou\n\nContato: Felipe - 5538912340000",
         "f": "core",
         "k": "card_erp"
        },
@@ -503,7 +503,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "14:03",
-        "t": "/confirmar 5538999110509 31/08 15:30",
+        "t": "/confirmar 5538912340000 31/08 15:30",
         "f": "core"
        }
       ]
@@ -538,7 +538,7 @@
         "p": "conversa",
         "q": "Júlia",
         "h": "14:02",
-        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538999110509\n- Convênio: Unimed",
+        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538912340000\n- Convênio: Unimed",
         "f": "core",
         "k": "readback_agendamento_convenio"
        },
@@ -559,7 +559,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "14:03",
-        "t": "🔔 Agendamento · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- Local: Clínica Gastrus\n- 💰 Convênio: Unimed\n\nContato: Felipe - 5538999110509",
+        "t": "🔔 Agendamento · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- Local: Clínica Gastrus\n- 💰 Convênio: Unimed\n\nContato: Felipe - 5538912340000",
         "f": "core",
         "k": "card_agendamento_convenio"
        },
@@ -567,7 +567,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "14:03",
-        "t": "/confirmar 5538999110509 31/08 15:30",
+        "t": "/confirmar 5538912340000 31/08 15:30",
         "f": "core"
        }
       ]
@@ -609,27 +609,27 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "09:14",
-        "t": "🔔 Paciente quer desmarcar\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- Local: Clínica Gastrus\n\nContato: Felipe - 38 99911-0509",
+        "t": "🔔 Paciente quer desmarcar\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- Local: Clínica Gastrus\n\nContato: Felipe - 38 91234-0000",
         "f": "n8n:Júlia · Atendente (V1)"
        },
        {
         "p": "grupo",
         "q": "Equipe",
         "h": "11:40",
-        "t": "/cancelar 38999110509"
+        "t": "/cancelar 38912340000"
        },
        {
         "p": "grupo",
         "q": "Júlia",
         "h": "11:40",
-        "t": "🗑️ Cancelar no Asa?\n\nFelipe Teste Camara\n(38) 99911-0509\nSegunda 31/08 às 15:30 · consulta em consultório\nAsa #4412\n\nResponda /cancelar 38999110509 -ok pra cancelar. Nada é enviado ao paciente.",
+        "t": "🗑️ Cancelar no Asa?\n\nFelipe Teste Camara\n(38) 91234-0000\nSegunda 31/08 às 15:30 · consulta em consultório\nAsa #4412\n\nResponda /cancelar 38912340000 -ok pra cancelar. Nada é enviado ao paciente.",
         "f": "cancelar"
        },
        {
         "p": "grupo",
         "q": "Equipe",
         "h": "13:05",
-        "t": "/cancelar 38999110509 -ok"
+        "t": "/cancelar 38912340000 -ok"
        },
        {
         "p": "grupo",
@@ -683,7 +683,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "09:15",
-        "t": "🗑️ Cancelado · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Era: Segunda 31/08 às 15h30\n- Local: Clínica Gastrus\n- Motivo: o paciente pediu na conversa\n- Na agenda: #4412 liberado\n\nContato: Felipe - 5538999110509",
+        "t": "🗑️ Cancelado · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Era: Segunda 31/08 às 15h30\n- Local: Clínica Gastrus\n- Motivo: o paciente pediu na conversa\n- Na agenda: #4412 liberado\n\nContato: Felipe - 5538912340000",
         "f": "core",
         "k": "card_cancelado"
        }
@@ -717,7 +717,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "09:14",
-        "t": "⚠️ Não desmarquei · Dr. Frederico\n- Paciente pediu cancelamento na conversa\n- Achei 2 agendamentos nesse telefone:\n   · Terça 01/09 às 14h30 (Felipe Teste Camara)\n   · Quinta 03/09 às 09h00 (Maria Camara)\n- Motivo: não dá pra saber qual é\n\nContato: Felipe - 5538999110509",
+        "t": "⚠️ Não desmarquei · Dr. Frederico\n- Paciente pediu cancelamento na conversa\n- Achei 2 agendamentos nesse telefone:\n   · Terça 01/09 às 14h30 (Felipe Teste Camara)\n   · Quinta 03/09 às 09h00 (Maria Camara)\n- Motivo: não dá pra saber qual é\n\nContato: Felipe - 5538912340000",
         "f": "core",
         "k": "card_sem_alvo"
        },
@@ -725,7 +725,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "09:14",
-        "t": "/cancelar 5538999110509 data=",
+        "t": "/cancelar 5538912340000 data=",
         "f": "core"
        }
       ]
@@ -767,27 +767,27 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "09:14",
-        "t": "🔔 Paciente quer remarcar\n- Paciente: Felipe Teste Camara\n- De: Segunda 31/08 às 15h30\n- Pediu: quarta à tarde\n\nContato: Felipe - 38 99911-0509",
+        "t": "🔔 Paciente quer remarcar\n- Paciente: Felipe Teste Camara\n- De: Segunda 31/08 às 15h30\n- Pediu: quarta à tarde\n\nContato: Felipe - 38 91234-0000",
         "f": "n8n:Júlia · Atendente (V1)"
        },
        {
         "p": "grupo",
         "q": "Equipe",
         "h": "11:40",
-        "t": "/remarcar 38999110509 data=02/09 hora=14:00"
+        "t": "/remarcar 38912340000 data=02/09 hora=14:00"
        },
        {
         "p": "grupo",
         "q": "Júlia",
         "h": "11:41",
-        "t": "🔄 Remarcar no Asa?\n\nFelipe Teste Camara\n(38) 99911-0509\nDe: Segunda 31/08 às 15:30\nPara: Quarta 02/09 às 14:00\nconsulta em consultório\nAsa #4412\n\nResponda /remarcar 38999110509 data=02/09 hora=14:00 -ok pra remarcar. Nada é enviado ao paciente.",
+        "t": "🔄 Remarcar no Asa?\n\nFelipe Teste Camara\n(38) 91234-0000\nDe: Segunda 31/08 às 15:30\nPara: Quarta 02/09 às 14:00\nconsulta em consultório\nAsa #4412\n\nResponda /remarcar 38912340000 data=02/09 hora=14:00 -ok pra remarcar. Nada é enviado ao paciente.",
         "f": "cancelar"
        },
        {
         "p": "grupo",
         "q": "Equipe",
         "h": "13:05",
-        "t": "/remarcar 38999110509 data=02/09 hora=14:00 -ok"
+        "t": "/remarcar 38912340000 data=02/09 hora=14:00 -ok"
        },
        {
         "p": "conversa",
@@ -838,7 +838,7 @@
         "p": "conversa",
         "q": "Júlia",
         "h": "09:16",
-        "t": "✅ Remarcado!\n\nFelipe Teste Camara - (38) 99911-0509\nConsulta com Dr. Frederico\nQuarta, 02/09 às 14:00.\n\n📍 Clínica Gastrus\nR. Eng. João Antônio Pimenta, 163 - Cidade Santa Maria, Montes Claros - MG\n\n*Os horários são pontuais, não atrase.* Deus abençoe 🙏🏻",
+        "t": "✅ Remarcado!\n\nFelipe Teste Camara - (38) 91234-0000\nConsulta com Dr. Frederico\nQuarta, 02/09 às 14:00.\n\n📍 Clínica Gastrus\nR. Eng. João Antônio Pimenta, 163 - Cidade Santa Maria, Montes Claros - MG\n\n*Os horários são pontuais, não atrase.* Deus abençoe 🙏🏻",
         "f": "snippet:remarcado",
         "k": "msg_remarcado"
        },
@@ -846,7 +846,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "09:16",
-        "t": "🔄 Remarcado · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- De: Segunda 31/08 às 15h30\n- Para: Quarta 02/09 às 14h00\n- Local: Clínica Gastrus\n- 💰 Particular: R$ 350,00 à vista ou R$ 400,00 no cartão\n- Na agenda: #4412 liberado, #4498 criado\n\nContato: Felipe - 5538999110509",
+        "t": "🔄 Remarcado · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- De: Segunda 31/08 às 15h30\n- Para: Quarta 02/09 às 14h00\n- Local: Clínica Gastrus\n- 💰 Particular: R$ 350,00 à vista ou R$ 400,00 no cartão\n- Na agenda: #4412 liberado, #4498 criado\n\nContato: Felipe - 5538912340000",
         "f": "core",
         "k": "card_remarcado"
        }
@@ -930,26 +930,26 @@
         "p": "grupo",
         "q": "Equipe",
         "h": "15:40",
-        "t": "[foto da agenda] /confirmar 38999110509"
+        "t": "[foto da agenda] /confirmar 38912340000"
        },
        {
         "p": "grupo",
         "q": "Júlia",
         "h": "15:40",
-        "t": "📋 Felipe Teste Camara\n(38) 99911-0509\nConsulta com Dr. Frederico\nSegunda 31/08 às 15:30\nParticular · R$ 350\nClínica Gastrus\n\nResponda /confirmar 38999110509 -ok pra enviar pro paciente.",
+        "t": "📋 Felipe Teste Camara\n(38) 91234-0000\nConsulta com Dr. Frederico\nSegunda 31/08 às 15:30\nParticular · R$ 350\nClínica Gastrus\n\nResponda /confirmar 38912340000 -ok pra enviar pro paciente.",
         "f": "v1comandos"
        },
        {
         "p": "grupo",
         "q": "Equipe",
         "h": "15:41",
-        "t": "/confirmar 38999110509 -ok"
+        "t": "/confirmar 38912340000 -ok"
        },
        {
         "p": "grupo",
         "q": "Júlia",
         "h": "15:41",
-        "t": "✅ Confirmação enviada pro paciente (38) 99911-0509.",
+        "t": "✅ Confirmação enviada pro paciente (38) 91234-0000.",
         "f": "v1comandos"
        }
       ]
@@ -985,13 +985,13 @@
         "p": "grupo",
         "q": "Equipe",
         "h": "17:02",
-        "t": "/encaminhar 38999110509 valias"
+        "t": "/encaminhar 38912340000 valias"
        },
        {
         "p": "grupo",
         "q": "Júlia",
         "h": "17:02",
-        "t": "↗️ 5538999110509 → Gastrovalias. Contato enviado pro paciente.",
+        "t": "↗️ 5538912340000 → Gastrovalias. Contato enviado pro paciente.",
         "f": "v1comandos"
        },
        {
@@ -1128,7 +1128,7 @@
         "p": "grupo",
         "q": "Júlia",
         "h": "13:12",
-        "t": "✋🏻 Novo lead: 5538999110509",
+        "t": "✋🏻 Novo lead: 5538912340000",
         "f": "widget"
        }
       ]
