@@ -39,6 +39,7 @@ o texto certo e confere se a mensagem de verdade diz aquilo. Mudou aqui, mudou o
 |---|---|
 | `fluxos.json` | A fonte da verdade: funções, cenários, mensagens |
 | `index.html` | A página que mostra e edita |
+| `prompts.html` + `prompts.json` | A outra página: a instrução do modelo e as frases prontas de cada cliente. Gabarito: `test_prompts.py` |
 | `servir.py` | Serve a página e grava o Salvar |
 | `verificar_fluxos.py` | O gabarito estático: o código ainda diz isso? |
 | `fluxos.py` | O que o gabarito ao vivo usa pra perguntar o texto certo |

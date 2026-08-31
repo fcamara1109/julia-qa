@@ -68,6 +68,9 @@ main{max-width:1180px;margin:0 auto;padding:24px 20px 90px}
   color:var(--fundo);padding:10px 18px;border-radius:99px;font-size:13px;opacity:0;
   transition:opacity .2s;pointer-events:none}
 .aviso.on{opacity:1}
+.nav{font-size:13px;color:var(--fraco);text-decoration:none;border:1px solid var(--linha);
+  padding:7px 13px;border-radius:7px}
+.nav:hover{border-color:var(--fraco);color:var(--tinta)}
 </style>
 </head>
 <body>
@@ -75,6 +78,7 @@ main{max-width:1180px;margin:0 auto;padding:24px 20px 90px}
   <div><h1>O que a Júlia escreve</h1>
   <div class="sub" id="placar">carregando…</div></div>
   <div class="espaco"></div>
+  <a class="nav" href="prompts.html">Instrução e frases</a>
   <button id="baixar">Baixar fluxos.json</button>
   <button id="descartar">Descartar edições</button>
   <button id="salvar" class="forte" disabled>Salvar</button>
