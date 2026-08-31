@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O que a Júlia escreve</title>
+<style>
+:root{
+  --fundo:#f4f5f3; --papel:#fff; --tinta:#1d2320; --fraco:#6b756f; --linha:#dfe3df;
+  --verde:#1f7a4d; --verde-fraco:#e7f3ec; --cinza-fraco:#eceeec; --amarelo:#b07d12;
+  --amarelo-fraco:#fdf3dd; --bolha-ia:#e9f3ec; --bolha-gente:#fff; --grupo:#f0f2f5;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --fundo:#14181a; --papel:#1b2022; --tinta:#e6ebe8; --fraco:#93a09a; --linha:#2b3236;
+  --verde:#5fc38d; --verde-fraco:#1c2d24; --cinza-fraco:#232a2c; --amarelo:#e0b45c;
+  --amarelo-fraco:#2f2716; --bolha-ia:#1f2f27; --bolha-gente:#242b2e; --grupo:#20272a;
+}}
+:root[data-theme="dark"]{
+  --fundo:#14181a; --papel:#1b2022; --tinta:#e6ebe8; --fraco:#93a09a; --linha:#2b3236;
+  --verde:#5fc38d; --verde-fraco:#1c2d24; --cinza-fraco:#232a2c; --amarelo:#e0b45c;
+  --amarelo-fraco:#2f2716; --bolha-ia:#1f2f27; --bolha-gente:#242b2e; --grupo:#20272a;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fundo);color:var(--tinta);
+  font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--papel);border-bottom:1px solid var(--linha);
+  padding:14px 20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+h1{font-size:17px;margin:0;font-weight:650;letter-spacing:-.01em}
+.sub{color:var(--fraco);font-size:13px}
+.espaco{flex:1}
+button{font:inherit;font-size:13px;padding:7px 13px;border:1px solid var(--linha);
+  background:var(--papel);color:var(--tinta);border-radius:7px;cursor:pointer}
+button:hover{border-color:var(--fraco)}
+button.forte{background:var(--verde);border-color:var(--verde);color:#fff}
+button.forte[disabled]{opacity:.4;cursor:default}
+main{max-width:1180px;margin:0 auto;padding:24px 20px 90px}
+.func{background:var(--papel);border:1px solid var(--linha);border-radius:12px;
+  padding:18px 20px;margin:0 0 18px}
+.func h2{font-size:16px;margin:0 0 4px;font-weight:620}
+.id{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--fraco);
+  border:1px solid var(--linha);padding:4px 6px;border-radius:5px;margin-right:8px}
+.nota{color:var(--fraco);font-size:13px;margin:6px 0 0;max-width:75ch}
+.pill{font-size:11px;padding:3px 8px;border-radius:99px;background:var(--cinza-fraco);
+  color:var(--fraco);margin-left:8px;white-space:nowrap}
+.pill.ar{background:var(--verde-fraco);color:var(--verde)}
+.pill.f4{background:var(--amarelo-fraco);color:var(--amarelo)}
+.cen{margin-top:16px;border-top:1px solid var(--linha);padding-top:14px}
+.cen h3{font-size:14px;margin:0 0 2px;font-weight:600}
+.paineis{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:12px}
+.painel{border:1px solid var(--linha);border-radius:10px;overflow:hidden}
+.painel>.cap{padding:8px 12px;background:var(--cinza-fraco);font-size:12px;color:var(--fraco);
+  display:flex;justify-content:space-between;gap:8px}
+.msgs{padding:12px;display:flex;flex-direction:column;gap:9px}
+.msg{max-width:92%;padding:8px 11px;border-radius:10px;background:var(--bolha-gente);
+  border:1px solid var(--linha);position:relative}
+.msg.ia{background:var(--bolha-ia);align-self:flex-end}
+.msg.grupo{background:var(--grupo)}
+.quem{font-size:11px;color:var(--fraco);margin-bottom:3px;display:flex;gap:6px;align-items:center}
+.txt{white-space:pre-wrap;word-break:break-word;outline:none;border-radius:4px}
+.txt:focus{box-shadow:0 0 0 2px var(--verde)}
+.msg.mudou{border-color:var(--amarelo);background:var(--amarelo-fraco)}
+.tag{font-size:10px;padding:2px 6px;border-radius:99px;background:var(--cinza-fraco);color:var(--fraco)}
+.tag.cobrado{background:var(--verde-fraco);color:var(--verde)}
+.tag.velho{background:var(--amarelo-fraco);color:var(--amarelo)}
+.ver{font-size:13px;color:var(--fraco);margin-top:10px;padding:8px 12px;
+  border:1px dashed var(--linha);border-radius:8px}
+.aviso{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--tinta);
+  color:var(--fundo);padding:10px 18px;border-radius:99px;font-size:13px;opacity:0;
+  transition:opacity .2s;pointer-events:none}
+.aviso.on{opacity:1}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>O que a Júlia escreve</h1>
+  <div class="sub" id="placar">carregando…</div></div>
+  <div class="espaco"></div>
+  <button id="baixar">Baixar fluxos.json</button>
+  <button id="descartar">Descartar edições</button>
+  <button id="salvar" class="forte" disabled>Salvar</button>
+</header>
+<main id="tela"></main>
+<div class="aviso" id="aviso"></div>
+<script>
+const EDIT = "qa-fluxos-edicoes";
+let dados = null, edicoes = JSON.parse(localStorage.getItem(EDIT) || "{}");
+
+const esc = s => s.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const chave = (f,c,p,i) => `${f}|${c}|${p}|${i}`;
+
+function tag(m){
+  if(!m.f) return '<span class="tag">prosa do modelo</span>';
+  if(m.f.startsWith("n8n:")) return `<span class="tag velho">${esc(m.f.slice(4))}</span>`;
+  return `<span class="tag cobrado">cobrado: ${esc(m.f)}</span>`;
+}
+
+function bolha(m, k){
+  const cls = ["msg"];
+  if(m.q === "Júlia") cls.push("ia");
+  if(m.p === "grupo") cls.push("grupo");
+  if(edicoes[k] !== undefined) cls.push("mudou");
+  const txt = edicoes[k] !== undefined ? edicoes[k] : m.t;
+  return `<div class="${cls.join(" ")}">
+    <div class="quem"><b>${esc(m.q)}</b> ${esc(m.h||"")} ${tag(m)}</div>
+    <div class="txt" contenteditable="plaintext-only" data-k="${k}">${esc(txt)}</div>
+  </div>`;
+}
+
+function painel(f, c, nome, pa){
+  if(!pa) return "";
+  const rotulo = nome === "hoje" ? "Como é hoje" : "Como fica";
+  return `<div class="painel"><div class="cap"><b>${rotulo}</b><span>${esc(pa.tag||"")}</span></div>
+    <div class="msgs">${(pa.msgs||[]).map((m,i)=>bolha(m, chave(f,c,nome,i))).join("")}</div></div>`;
+}
+
+function desenha(){
+  let bolhas = 0, cens = 0;
+  document.getElementById("tela").innerHTML = dados.funcoes.map(fn => {
+    const cs = fn.cenarios || [];
+    cens += cs.length;
+    cs.forEach(c => ["hoje","depois"].forEach(p => bolhas += ((c[p]||{}).msgs||[]).length));
+    const estado = fn.estado === "no ar" ? "ar" : fn.estado === "fatia 4" ? "f4" : "";
+    return `<section class="func" id="${fn.id}">
+      <h2><span class="id">${fn.id}</span>${esc(fn.nome)}
+        <span class="pill ${estado}">${esc(fn.estado)}</span></h2>
+      ${fn.nota ? `<p class="nota">${esc(fn.nota)}</p>` : ""}
+      ${fn.gabarito ? `<p class="nota">Gabarito: ${esc(fn.gabarito)}</p>` : ""}
+      ${fn.ver ? `<div class="ver">O texto desta função mora em <b>${esc(fn.ver)}</b>: é o mesmo comando, editado lá.</div>` : ""}
+      ${cs.map(c => `<div class="cen"><h3>${esc(c.nome)}</h3>
+        ${c.nota ? `<p class="nota">${esc(c.nota)}</p>` : ""}
+        <div class="paineis">${painel(fn.id,c.id,"hoje",c.hoje)}${painel(fn.id,c.id,"depois",c.depois)}</div>
+      </div>`).join("")}
+      ${(!cs.length && !fn.ver) ? `<div class="ver">Sem cenário: esta função não escreve mensagem, ou o texto dela ainda não foi trazido pra cá.</div>` : ""}
+    </section>`;
+  }).join("");
+  document.getElementById("placar").textContent =
+    `${dados.funcoes.length} funções · ${cens} cenários · ${bolhas} mensagens · ${Object.keys(edicoes).length} editadas`;
+  document.getElementById("salvar").disabled = !Object.keys(edicoes).length;
+}
+
+document.addEventListener("input", e => {
+  const el = e.target.closest(".txt"); if(!el) return;
+  edicoes[el.dataset.k] = el.innerText;
+  localStorage.setItem(EDIT, JSON.stringify(edicoes));
+  el.closest(".msg").classList.add("mudou");
+  document.getElementById("salvar").disabled = false;
+});
+
+function aplicado(){
+  // as edições entram numa cópia: o objeto da tela continua sendo o arquivo como está no disco
+  const copia = JSON.parse(JSON.stringify(dados));
+  for(const fn of copia.funcoes)
+    for(const c of (fn.cenarios||[]))
+      for(const p of ["hoje","depois"])
+        ((c[p]||{}).msgs||[]).forEach((m,i) => {
+          const v = edicoes[chave(fn.id,c.id,p,i)];
+          if(v !== undefined) m.t = v;
+        });
+  return copia;
+}
+
+function avisar(t){
+  const a = document.getElementById("aviso");
+  a.textContent = t; a.classList.add("on");
+  setTimeout(() => a.classList.remove("on"), 2600);
+}
+
+document.getElementById("salvar").onclick = async () => {
+  const corpo = JSON.stringify(aplicado(), null, 1);
+  try{
+    const r = await fetch("/salvar", {method:"POST", body:corpo});
+    if(!r.ok) throw new Error(r.status);
+    dados = JSON.parse(corpo); edicoes = {}; localStorage.removeItem(EDIT);
+    desenha(); avisar("Salvo no fluxos.json");
+  }catch(e){
+    baixar(corpo);
+    avisar("Sem servidor aqui: baixei o fluxos.json pra você mandar pro Claude");
+  }
+};
+
+function baixar(corpo){
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([corpo], {type:"application/json"}));
+  a.download = "fluxos.json"; a.click(); URL.revokeObjectURL(a.href);
+}
+document.getElementById("baixar").onclick = () => baixar(JSON.stringify(aplicado(), null, 1));
+document.getElementById("descartar").onclick = () => {
+  if(!confirm("Jogar fora as edições que ainda não foram salvas?")) return;
+  edicoes = {}; localStorage.removeItem(EDIT); desenha();
+};
+
+fetch("fluxos.json").then(r => r.json()).then(d => { dados = d; desenha(); })
+  .catch(() => document.getElementById("tela").innerHTML =
+    '<div class="func">Não consegui ler o <b>fluxos.json</b>. Rode <code>python3 _shared/qa/servir.py</code> e abra pelo endereço que ele imprime.</div>');
+</script>
+</body>
+</html>

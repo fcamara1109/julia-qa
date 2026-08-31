@@ -1,0 +1,1180 @@
+{
+ "versao": 1,
+ "sobre": "Fonte da verdade do que a Júlia escreve. Edite a bolha no navegador, salve e rode `python3 _shared/qa/verificar_fluxos.py`: o que ficar vermelho é o que falta mudar no código pra alcançar este arquivo.",
+ "exemplo": {
+  "paciente": "Felipe Teste Camara",
+  "telefone": "38 99911-0509",
+  "telefone_fmt": "(38) 99911-0509",
+  "telefone_cru": "38999110509",
+  "telefone_e164": "5538999110509",
+  "primeiro_nome": "Felipe",
+  "profissional": "Dr. Frederico",
+  "local": "Clínica Gastrus",
+  "local_curto": "Gastrus",
+  "endereco": "R. Eng. João Antônio Pimenta, 163 - Cidade Santa Maria, Montes Claros - MG",
+  "destino": "Clínica Gastrovalias",
+  "procedimento": "consulta em consultório",
+  "cidade": "Montes Claros",
+  "destino_curto": "Gastrovalias",
+  "convenio": "Unimed",
+  "outro_paciente": "Maria Camara",
+  "ocupado_por": "Maria S., agendado"
+ },
+ "funcoes": [
+  {
+   "id": "F1",
+   "nome": "Responder dúvida sobre o médico, o local e o procedimento",
+   "canal": "conversa",
+   "estado": "no ar",
+   "nota": "Não é tool: os fatos entram no contexto do turno e a Júlia responde direto.",
+   "cenarios": [
+    {
+     "id": "f1-fato",
+     "nome": "Pergunta sobre o médico",
+     "nota": "Texto livre: quem escreve é o modelo, com os fatos da ficha do cliente.",
+     "depois": {
+      "tag": "sem ninguém da equipe",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "09:12",
+        "t": "O Dr. Frederico faz cirurgia de hemorroida?"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "09:12",
+        "t": "Faz sim ☺️ O Dr. Frederico é proctologista, atende a consulta e o tratamento cirúrgico na Clínica Gastrus.\n\nQuer que eu veja um horário pra você?"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "F2",
+   "nome": "Dizer o preço particular",
+   "canal": "conversa",
+   "estado": "no ar",
+   "nota": "O valor sai da tabela de preços do cliente, não da cabeça do modelo.",
+   "cenarios": [
+    {
+     "id": "f2-preco",
+     "nome": "Quanto custa",
+     "nota": "",
+     "depois": {
+      "tag": "sem ninguém da equipe",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "10:03",
+        "t": "Quanto custa a consulta particular?"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "10:03",
+        "t": "A consulta particular com o Dr. Frederico na Clínica Gastrus é R$ 350 ☺️\n\nQuer que eu veja os horários disponíveis?"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "F3",
+   "nome": "Dizer se aceita o convênio, onde e por quanto",
+   "canal": "conversa",
+   "estado": "no ar",
+   "nota": "Tool `consultar_convenio`. Plano aceito só no outro local vira encaminhamento (F4).",
+   "cenarios": [
+    {
+     "id": "f3-convenio",
+     "nome": "Aceita meu plano?",
+     "nota": "",
+     "depois": {
+      "tag": "sem ninguém da equipe",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "11:20",
+        "t": "Vocês atendem Unimed?"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "11:20",
+        "t": "Atendemos sim! Na Clínica Gastrus o Dr. Frederico atende Unimed ☺️\n\nVocê tem a carteirinha em mãos? Pode me mandar uma foto que eu já deixo tudo pronto."
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "F4",
+   "nome": "Encaminhar pra outro local ou clínica",
+   "canal": "conversa",
+   "estado": "no ar",
+   "nota": "O texto do destino é fixo, mora na tabela de encaminhamentos. 6/6 no gabarito.",
+   "cenarios": [
+    {
+     "id": "f4-encaminha",
+     "nome": "Caso que a Gastrus não resolve",
+     "nota": "A primeira bolha é do modelo; a segunda é o texto do destino, palavra por palavra.",
+     "depois": {
+      "tag": "sem ninguém da equipe",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "14:40",
+        "t": "Meu filho de 8 anos precisa passar com o Dr. Frederico"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:40",
+        "t": "Criança o Dr. Frederico atende na Clínica Gastrovalias ☺️"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:40",
+        "t": "Perfeito! Aqui estão os contatos da Clínica Gastrovalias:\n\nTelefone: 38 3221 6593 | WhatsApp: 38 99220-4639\n\nQualquer dificuldade, pode me retornar aqui, tá? ☺️",
+        "f": "destinos"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "F5",
+   "nome": "Passar pra uma pessoa (dúvida, urgência)",
+   "canal": "conversa",
+   "estado": "no ar",
+   "nota": "A Júlia para de responder e o grupo recebe o contato. É o freio de mão do fluxo.",
+   "cenarios": [
+    {
+     "id": "f5-urgencia",
+     "nome": "Urgência",
+     "nota": "",
+     "depois": {
+      "tag": "a equipe assume a conversa",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "08:05",
+        "t": "Estou com sangramento desde ontem, consigo passar hoje?"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "08:05",
+        "t": "Vou chamar meu supervisor pra ver um encaixe o quanto antes 🙏🏻",
+        "f": "snippet:urgencia"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "08:05",
+        "t": "👉🏼 Dr. Frederico · duvida\n\nContato: Felipe - 38 99911-0509",
+        "f": "core"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "F6",
+   "nome": "Encerrar lead perdido",
+   "canal": "conversa",
+   "estado": "no ar",
+   "nota": "Grava o evento `lost` e encerra sem insistir.",
+   "cenarios": [
+    {
+     "id": "f6-perdido",
+     "nome": "Desistiu",
+     "nota": "",
+     "depois": {
+      "tag": "sem ninguém da equipe",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "16:31",
+        "t": "Obrigado, mas vou deixar pra frente"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "16:31",
+        "t": "Ok! Qualquer dúvida é só me chamar. Fica com Deus 🙏🏻",
+        "f": "snippet:encerramento_leve"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "F7",
+   "nome": "Oferecer horário e fechar consulta particular",
+   "canal": "conversa",
+   "estado": "no ar",
+   "nota": "Cria sozinha na agenda da clínica desde 30/08. O grupo recebe o card com o resultado.",
+   "gabarito": "fred/tools/gabarito_agendamento.py · AG1, AG3, AG4",
+   "cenarios": [
+    {
+     "id": "feliz",
+     "nome": "Feliz",
+     "nota": "O paciente escolhe o horário, a Júlia repete o que entendeu, ele confirma e a consulta já está na agenda. Ninguém da equipe precisa agir.",
+     "hoje": {
+      "tag": "2 confirmações humanas",
+      "lento": true,
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "14:02",
+        "t": "Pode ser segunda 15h30. O nome é Felipe Teste Camara"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:02",
+        "t": "Combinado! Me dá só um tempinho para confirmar no sistema. Pode demorar um pouco mas te retorno aqui, tá?",
+        "f": "snippet:sucesso"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "14:03",
+        "t": "🔔 Paciente novo!\n- Local: Gastrus\n- Procedimento: Consulta\n- Horário combinado: segunda 31/08 às 15h30\n- Tipo: 💰 Particular - R$ 350\n\n- Paciente: Felipe Teste Camara\n- Telefone do paciente: 38 99911-0509\n\n📱 Contato no WhatsApp: Felipe - 38 99911-0509",
+        "f": "n8n:Júlia · Atendente (V1)"
+       },
+       {
+        "p": "grupo",
+        "q": "Equipe",
+        "h": "15:37",
+        "t": "/confirmar 38999110509 31/08 15:30 nome=Felipe Teste Camara modalidade=particular valor=350"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "15:37",
+        "t": "📋 Criado no Asa · confirmar envio?\n\nFelipe Teste Camara\n(38) 99911-0509\nSegunda 31/08 às 15:30\nConsulta · Particular R$ 350 · anúncio\nClínica Gastrus\n\nAsa #4412 · ✅ slot livre\nvalor R$ 400,00 · obs: particular, R$ 350\n\nResponda /confirmar 38999110509 -ok pra enviar, ou campo=valor pra ajustar.",
+        "f": "n8n:Júlia · Comandos do grupo (V1)"
+       },
+       {
+        "p": "grupo",
+        "q": "Equipe",
+        "h": "16:20",
+        "t": "/confirmar 38999110509 -ok"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "16:20",
+        "t": "✅ Confirmado!\n\nFelipe Teste Camara - (38) 99911-0509\nConsulta com Dr. Frederico\nSegunda, 31/08 às 15:30.\n\n📍 Clínica Gastrus\nR. Eng. João Antônio Pimenta, 163 - Cidade Santa Maria, Montes Claros - MG\nhttps://share.google/KGSY0jmKyuOdFhg4k\n\nA equipe da Gastrus também vai te contatar para lembrar do horário ☺️\n\n*Os horários são pontuais, não atrase.* Deus abençoe 🙏🏻",
+        "f": "v1comandos"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "16:20",
+        "t": "✅ Confirmação enviada pro paciente e registrada.\nAsa 4412 · Felipe Teste Camara · 31/08 15:30",
+        "f": "v1comandos"
+       }
+      ]
+     },
+     "depois": {
+      "tag": "nenhuma confirmação humana",
+      "lento": false,
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "14:02",
+        "t": "Pode ser segunda 15h30. O nome é Felipe Teste Camara"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:02",
+        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538999110509\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
+        "f": "core",
+        "k": "readback_agendamento"
+       },
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "14:03",
+        "t": "Isso mesmo, pode marcar"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:03",
+        "t": "✅ Confirmado!\n\nFelipe Teste Camara - 5538999110509\nConsulta com Dr. Frederico\nSegunda 31/08 às 15h30.\n\n📍 Clínica Gastrus\nR. Eng. João Antônio Pimenta, 163 - Cidade Santa Maria, Montes Claros - MG, 39400-105\n\nA equipe da clínica também vai te contatar para lembrar do horário ☺️\n\n*Os horários são pontuais, não atrase.* Deus abençoe 🙏🏻",
+        "f": "snippet:confirmado",
+        "k": "msg_confirmado"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "14:03",
+        "t": "✅ Agendado · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- Local: Clínica Gastrus\n- 💰 Particular: R$ 350,00 à vista ou R$ 400,00 no cartão\n- Na agenda: #4412\n\nContato: Felipe - 5538999110509",
+        "f": "core",
+        "k": "card_agendado"
+       }
+      ]
+     }
+    },
+    {
+     "id": "corrige",
+     "nome": "Paciente corrige",
+     "nota": "A ficha mudou, então nada é escrito no sistema: a Júlia repete o que entendeu de novo e espera o sim outra vez. A trava compara os quatro campos (dia, hora, nome, particular ou convênio).",
+     "depois": {
+      "tag": "a trava segura",
+      "lento": false,
+      "titulo": "Paciente corrige o que a Júlia entendeu",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "14:02",
+        "t": "Pode ser segunda 15h30. O nome é Felipe Teste Camara"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:02",
+        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538999110509\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
+        "f": "core",
+        "k": "readback_agendamento"
+       },
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "14:03",
+        "t": "Na verdade é terça, dia 1º, às 14h"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:03",
+        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Terça 01/09 às 14h\n- Paciente: Felipe Teste Camara | 5538999110509\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
+        "f": "core",
+        "k": "readback_agendamento"
+       },
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "14:04",
+        "t": "Isso"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:04",
+        "t": "✅ Confirmado!\n\nFelipe Teste Camara - 5538999110509\nConsulta com Dr. Frederico\nTerça 01/09 às 14h.\n\n📍 Clínica Gastrus\nR. Eng. João Antônio Pimenta, 163 - Cidade Santa Maria, Montes Claros - MG, 39400-105\n\nA equipe da clínica também vai te contatar para lembrar do horário ☺️\n\n*Os horários são pontuais, não atrase.* Deus abençoe 🙏🏻",
+        "f": "snippet:confirmado",
+        "k": "msg_confirmado"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "14:04",
+        "t": "✅ Agendado · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Terça 01/09 às 14h\n- Local: Clínica Gastrus\n- 💰 Particular: R$ 350,00 à vista ou R$ 400,00 no cartão\n- Na agenda: #4413\n\nContato: Felipe - 5538999110509",
+        "f": "core",
+        "k": "card_agendado"
+       }
+      ]
+     }
+    },
+    {
+     "id": "ocupado",
+     "nome": "Horário ocupado",
+     "ruim": true,
+     "nota": "Alguém pegou o horário entre a oferta e o sim. O paciente NUNCA ouve que está marcado: ouve a frase de espera. O chat trava, o grupo recebe o motivo e o comando pronto pra uma pessoa assumir.",
+     "depois": {
+      "tag": "ninguém ouve confirmação falsa",
+      "lento": false,
+      "titulo": "Horário ocupado na hora de gravar",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "14:02",
+        "t": "Pode ser segunda 15h30. O nome é Felipe Teste Camara"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:02",
+        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538999110509\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
+        "f": "core",
+        "k": "readback_agendamento"
+       },
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "14:03",
+        "t": "Isso mesmo, pode marcar"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:03",
+        "t": "Só um instante, vou olhar isso pra você ☺️",
+        "f": "snippet:freio"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "14:03",
+        "t": "🔴 Horário ocupado na agenda · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- 💰 R$ 350,00 à vista ou R$ 400,00 no cartão\n- Motivo: 15:30 ocupado (Maria S., agendado)\n\nContato: Felipe - 5538999110509",
+        "f": "core",
+        "k": "card_ocupado"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "14:03",
+        "t": "/confirmar 5538999110509 31/08 15:30",
+        "f": "core"
+       }
+      ]
+     }
+    },
+    {
+     "id": "erp",
+     "nome": "Sistema fora do ar",
+     "ruim": true,
+     "nota": "O sistema da clínica não respondeu. Mesma regra: o paciente ouve a frase de espera, nunca uma confirmação. O grupo vê que NÃO entrou na agenda, com o motivo.",
+     "depois": {
+      "tag": "falha do ERP vira alerta, não silêncio",
+      "lento": false,
+      "titulo": "Sistema da clínica fora do ar",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "14:02",
+        "t": "Pode ser segunda 15h30. O nome é Felipe Teste Camara"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:02",
+        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538999110509\n- Particular, R$ 400 à prazo ou R$ 350 à vista",
+        "f": "core",
+        "k": "readback_agendamento"
+       },
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "14:03",
+        "t": "Isso mesmo, pode marcar"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:03",
+        "t": "Só um instante, vou olhar isso pra você ☺️",
+        "f": "snippet:freio"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "14:03",
+        "t": "🔴 NÃO entrou na agenda · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- 💰 R$ 350,00 à vista ou R$ 400,00 no cartão\n- Motivo: login falhou\n\nContato: Felipe - 5538999110509",
+        "f": "core",
+        "k": "card_erp"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "14:03",
+        "t": "/confirmar 5538999110509 31/08 15:30",
+        "f": "core"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "F8",
+   "nome": "Fechar consulta por convênio",
+   "canal": "conversa",
+   "estado": "no ar",
+   "nota": "Fecha sozinha nos 18 planos que resolvem no sistema da clínica. Plano não conciliado vira pessoa, de propósito.",
+   "gabarito": "fred/tools/gabarito_agendamento.py · AG2",
+   "cenarios": [
+    {
+     "id": "convenio",
+     "nome": "Convênio",
+     "nota": "Convênio não fecha sozinho. A Júlia repete o que entendeu igual, mas na hora de gravar quem assume é uma pessoa: o valor é tabelado e o plano precisa ser conferido.",
+     "depois": {
+      "tag": "segue com pessoa, de propósito",
+      "lento": false,
+      "titulo": "Convênio continua com a equipe",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "14:02",
+        "t": "Pode ser segunda 15h30. Felipe Teste Camara, e eu tenho Unimed"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:02",
+        "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Segunda 31/08 às 15h30\n- Paciente: Felipe Teste Camara | 5538999110509\n- Convênio: Unimed",
+        "f": "core",
+        "k": "readback_agendamento_convenio"
+       },
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "14:03",
+        "t": "Isso mesmo"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "14:03",
+        "t": "Combinado! Me dá só um tempinho para confirmar no sistema. Pode demorar um pouco mas te retorno aqui, tá?",
+        "f": "snippet:sucesso"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "14:03",
+        "t": "🔔 Agendamento · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- Local: Clínica Gastrus\n- 💰 Convênio: Unimed\n\nContato: Felipe - 5538999110509",
+        "f": "core",
+        "k": "card_agendamento_convenio"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "14:03",
+        "t": "/confirmar 5538999110509 31/08 15:30",
+        "f": "core"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "F9",
+   "nome": "Cancelar um agendamento pela conversa",
+   "canal": "conversa",
+   "estado": "no ar",
+   "nota": "Só desmarca depois que o paciente confirma qual consulta é. Dois agendamentos no mesmo telefone: passa pra pessoa.",
+   "gabarito": "fred/tools/gabarito_agendamento.py · CN1, CN2",
+   "cenarios": [
+    {
+     "id": "cancelar",
+     "nome": "Cancelar",
+     "fatia4": true,
+     "nota": "Fatia 4. Hoje o paciente avisa que não vai poder, e nada acontece até alguém da equipe ver o grupo e digitar dois comandos. Depois, a Júlia confirma o que vai desmarcar, desmarca e registra na hora.",
+     "hoje": {
+      "tag": "2 comandos humanos",
+      "lento": true,
+      "titulo": "Cancelamento hoje",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "09:14",
+        "t": "Bom dia! Infelizmente não vou poder ir na segunda, preciso desmarcar"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "09:14",
+        "t": "Sem problema! Vou avisar a equipe e já te retorno ☺️"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "09:14",
+        "t": "🔔 Paciente quer desmarcar\n- Paciente: Felipe Teste Camara\n- Quando: Segunda 31/08 às 15h30\n- Local: Clínica Gastrus\n\nContato: Felipe - 38 99911-0509",
+        "f": "n8n:Júlia · Atendente (V1)"
+       },
+       {
+        "p": "grupo",
+        "q": "Equipe",
+        "h": "11:40",
+        "t": "/cancelar 38999110509"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "11:40",
+        "t": "🗑️ Cancelar no Asa?\n\nFelipe Teste Camara\n(38) 99911-0509\nSegunda 31/08 às 15:30 · consulta em consultório\nAsa #4412\n\nResponda /cancelar 38999110509 -ok pra cancelar. Nada é enviado ao paciente.",
+        "f": "cancelar"
+       },
+       {
+        "p": "grupo",
+        "q": "Equipe",
+        "h": "13:05",
+        "t": "/cancelar 38999110509 -ok"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "13:05",
+        "t": "✅ Cancelado no Asa. #4412 · Felipe Teste Camara · 31/08 15:30\nPlanilha entra pela próxima rodada dos desfechos.",
+        "f": "cancelar"
+       },
+       {
+        "p": "conversa",
+        "q": "Equipe",
+        "h": "13:06",
+        "t": "Prontinho, desmarquei aqui pro senhor!"
+       }
+      ]
+     },
+     "depois": {
+      "tag": "a Júlia desmarca sozinha",
+      "lento": false,
+      "titulo": "Cancelamento depois da fatia 4",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "09:14",
+        "t": "Bom dia! Infelizmente não vou poder ir na segunda, preciso desmarcar"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "09:14",
+        "t": "Só me confirma pra eu não desmarcar o errado:\n- Consulta com Dr. Frederico na Clínica Gastrus\n- Segunda 31/08 às 15h30\n\nÉ essa consulta que você quer cancelar?",
+        "f": "core",
+        "k": "readback_cancelar"
+       },
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "09:15",
+        "t": "Isso, essa mesma"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "09:15",
+        "t": "Cancelado ☺️\n\nO horário de segunda 31/08 às 15h30 está liberado. Quando quiser remarcar é só me chamar por aqui.\n\nDeus abençoe 🙏🏻",
+        "f": "snippet:cancelado",
+        "k": "msg_cancelado"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "09:15",
+        "t": "🗑️ Cancelado · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- Era: Segunda 31/08 às 15h30\n- Local: Clínica Gastrus\n- Motivo: o paciente pediu na conversa\n- Na agenda: #4412 liberado\n\nContato: Felipe - 5538999110509",
+        "f": "core",
+        "k": "card_cancelado"
+       }
+      ]
+     }
+    },
+    {
+     "id": "cancel-nao-achou",
+     "nome": "Não achou o horário",
+     "ruim": true,
+     "fatia4": true,
+     "nota": "Fatia 4, o caso que protege. Se a Júlia não achar exatamente um agendamento daquele paciente, ela não chuta: passa pra equipe. Desmarcar o horário errado é pior que demorar.",
+     "depois": {
+      "tag": "na dúvida, não desmarca",
+      "lento": false,
+      "titulo": "Quando a Júlia não tem certeza",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "09:14",
+        "t": "Oi, quero desmarcar a consulta"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "09:14",
+        "t": "Só um instante, vou olhar isso pra o senhor ☺️"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "09:14",
+        "t": "⚠️ Não desmarquei · Dr. Frederico\n- Paciente pediu cancelamento na conversa\n- Achei 2 agendamentos nesse telefone:\n   · Terça 01/09 às 14h30 (Felipe Teste Camara)\n   · Quinta 03/09 às 09h00 (Maria Camara)\n- Motivo: não dá pra saber qual é\n\nContato: Felipe - 5538999110509",
+        "f": "core",
+        "k": "card_sem_alvo"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "09:14",
+        "t": "/cancelar 5538999110509 data=",
+        "f": "core"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "F10",
+   "nome": "Remarcar pela conversa",
+   "canal": "conversa",
+   "estado": "no ar",
+   "nota": "Move o agendamento (mesmo número, data nova). Não cria um segundo.",
+   "gabarito": "fred/tools/gabarito_agendamento.py · RM1",
+   "cenarios": [
+    {
+     "id": "remarcar",
+     "nome": "Remarcar",
+     "fatia4": true,
+     "nota": "Fatia 4. Remarcar é cancelar e criar na mesma conversa. A Júlia só executa depois de repetir de onde para onde, e o grupo recebe as duas pontas numa linha só.",
+     "hoje": {
+      "tag": "2 comandos humanos",
+      "lento": true,
+      "titulo": "Remarcação hoje",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "09:14",
+        "t": "Dá pra passar a consulta de segunda pra quarta de tarde?"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "09:14",
+        "t": "Vou olhar isso pra o senhor e já te retorno ☺️"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "09:14",
+        "t": "🔔 Paciente quer remarcar\n- Paciente: Felipe Teste Camara\n- De: Segunda 31/08 às 15h30\n- Pediu: quarta à tarde\n\nContato: Felipe - 38 99911-0509",
+        "f": "n8n:Júlia · Atendente (V1)"
+       },
+       {
+        "p": "grupo",
+        "q": "Equipe",
+        "h": "11:40",
+        "t": "/remarcar 38999110509 data=02/09 hora=14:00"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "11:41",
+        "t": "🔄 Remarcar no Asa?\n\nFelipe Teste Camara\n(38) 99911-0509\nDe: Segunda 31/08 às 15:30\nPara: Quarta 02/09 às 14:00\nconsulta em consultório\nAsa #4412\n\nResponda /remarcar 38999110509 data=02/09 hora=14:00 -ok pra remarcar. Nada é enviado ao paciente.",
+        "f": "cancelar"
+       },
+       {
+        "p": "grupo",
+        "q": "Equipe",
+        "h": "13:05",
+        "t": "/remarcar 38999110509 data=02/09 hora=14:00 -ok"
+       },
+       {
+        "p": "conversa",
+        "q": "Equipe",
+        "h": "13:06",
+        "t": "Passei pra quarta 02/09 às 14h, tá bom assim?"
+       }
+      ]
+     },
+     "depois": {
+      "tag": "a Júlia remarca sozinha",
+      "lento": false,
+      "titulo": "Remarcação depois da fatia 4",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "09:14",
+        "t": "Dá pra passar a consulta de segunda pra quarta de tarde?"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "09:14",
+        "t": "Dá sim ☺️ Na quarta 02/09 eu tenho 14h e 15h30.\n\nQual fica melhor pro senhor?"
+       },
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "09:15",
+        "t": "Pode ser 14h"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "09:15",
+        "t": "Me confirma se entendi certo:\n- Sai de: segunda 31/08 às 15h30\n- Entra em: quarta 02/09 às 14h\n- Consulta com Dr. Frederico na Clínica Gastrus\n- Paciente: Felipe Teste Camara",
+        "f": "core",
+        "k": "readback_remarcar"
+       },
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "09:16",
+        "t": "Isso mesmo"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "09:16",
+        "t": "✅ Remarcado!\n\nFelipe Teste Camara - (38) 99911-0509\nConsulta com Dr. Frederico\nQuarta, 02/09 às 14:00.\n\n📍 Clínica Gastrus\nR. Eng. João Antônio Pimenta, 163 - Cidade Santa Maria, Montes Claros - MG\n\n*Os horários são pontuais, não atrase.* Deus abençoe 🙏🏻",
+        "f": "snippet:remarcado",
+        "k": "msg_remarcado"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "09:16",
+        "t": "🔄 Remarcado · Dr. Frederico\n- Paciente: Felipe Teste Camara\n- De: Segunda 31/08 às 15h30\n- Para: Quarta 02/09 às 14h00\n- Local: Clínica Gastrus\n- 💰 Particular: R$ 350,00 à vista ou R$ 400,00 no cartão\n- Na agenda: #4412 liberado, #4498 criado\n\nContato: Felipe - 5538999110509",
+        "f": "core",
+        "k": "card_remarcado"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "F11",
+   "nome": "Reconhecer quem já é paciente",
+   "canal": "conversa",
+   "estado": "no ar",
+   "nota": "Roda antes do modelo, em toda mensagem: ela já abre sabendo o nome e a consulta que está de pé.",
+   "cenarios": [
+    {
+     "id": "f11-conhecido",
+     "nome": "Paciente que já tem consulta",
+     "nota": "",
+     "depois": {
+      "tag": "sem ninguém da equipe",
+      "msgs": [
+       {
+        "p": "conversa",
+        "q": "Paciente",
+        "h": "07:50",
+        "t": "Bom dia"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "07:50",
+        "t": "Bom dia, Felipe ☺️ Tudo bem?\n\nVi aqui que você tem consulta com o Dr. Frederico na segunda 31/08 às 15h30, na Clínica Gastrus. Posso te ajudar em alguma coisa?"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "F12",
+   "nome": "Cutucar lead que sumiu (nudge)",
+   "canal": "conversa",
+   "estado": "fica na V1",
+   "nota": "Sai do atendente e vira o workflow CRM. O texto mora no fluxo velho até lá: não entra aqui pra não virar duas verdades.",
+   "cenarios": []
+  },
+  {
+   "id": "F13",
+   "nome": "Oferecer exame ou cirurgia (upsell)",
+   "canal": "conversa",
+   "estado": "não existe",
+   "nota": "Fora do escopo do atendente (30/08). Vira rotina ou comando de grupo quando alguém precisar.",
+   "cenarios": []
+  },
+  {
+   "id": "G1",
+   "nome": "/confirmar: cria na agenda, grava e avisa o paciente",
+   "canal": "grupo",
+   "estado": "fatia 4",
+   "nota": "Hoje é o caminho manual de toda consulta. O painel 'hoje' da F7 é este comando.",
+   "ver": "F7 · feliz · hoje",
+   "cenarios": []
+  },
+  {
+   "id": "G2",
+   "nome": "/confirmar por print: lê a foto e preenche sozinho",
+   "canal": "grupo",
+   "estado": "fatia 4",
+   "nota": "A equipe manda o print da agenda da clínica em vez de digitar os campos.",
+   "cenarios": [
+    {
+     "id": "g2-print",
+     "nome": "Confirmar pelo print",
+     "nota": "",
+     "hoje": {
+      "tag": "1 confirmação humana",
+      "lento": false,
+      "msgs": [
+       {
+        "p": "grupo",
+        "q": "Equipe",
+        "h": "15:40",
+        "t": "[foto da agenda] /confirmar 38999110509"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "15:40",
+        "t": "📋 Felipe Teste Camara\n(38) 99911-0509\nConsulta com Dr. Frederico\nSegunda 31/08 às 15:30\nParticular · R$ 350\nClínica Gastrus\n\nResponda /confirmar 38999110509 -ok pra enviar pro paciente.",
+        "f": "v1comandos"
+       },
+       {
+        "p": "grupo",
+        "q": "Equipe",
+        "h": "15:41",
+        "t": "/confirmar 38999110509 -ok"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "15:41",
+        "t": "✅ Confirmação enviada pro paciente (38) 99911-0509.",
+        "f": "v1comandos"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "G3",
+   "nome": "/cancelar e /remarcar pelo grupo",
+   "canal": "grupo",
+   "estado": "fatia 4",
+   "nota": "Acha o agendamento no sistema da clínica, mexe nele e grava o evento. Os painéis 'hoje' da F9 e da F10 são este comando.",
+   "ver": "F9 · cancelar · hoje  |  F10 · remarcar · hoje",
+   "cenarios": []
+  },
+  {
+   "id": "G4",
+   "nome": "/encaminhar: manda o contato do destino pro paciente",
+   "canal": "grupo",
+   "estado": "fatia 4",
+   "nota": "Mesmo texto de destino que a F4 usa: a tabela é uma só.",
+   "cenarios": [
+    {
+     "id": "g4-encaminhar",
+     "nome": "Encaminhar na mão",
+     "nota": "",
+     "hoje": {
+      "tag": "1 confirmação humana",
+      "lento": false,
+      "msgs": [
+       {
+        "p": "grupo",
+        "q": "Equipe",
+        "h": "17:02",
+        "t": "/encaminhar 38999110509 valias"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "17:02",
+        "t": "↗️ 5538999110509 → Gastrovalias. Contato enviado pro paciente.",
+        "f": "v1comandos"
+       },
+       {
+        "p": "conversa",
+        "q": "Júlia",
+        "h": "17:02",
+        "t": "Perfeito! Aqui estão os contatos da Clínica Gastrovalias:\n\nTelefone: 38 3221 6593 | WhatsApp: 38 99220-4639\n\nQualquer dificuldade, pode me retornar aqui, tá? ☺️",
+        "f": "destinos"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "G5",
+   "nome": "/agenda: atualiza a agenda por print ou por texto",
+   "canal": "grupo",
+   "estado": "fica na V1",
+   "nota": "Decisão do Felipe, 31/08: a Joana fica. É o caminho manual pra quando o pull automático falhar.",
+   "cenarios": []
+  },
+  {
+   "id": "G6",
+   "nome": "/agenda -vaga: lista as vagas livres",
+   "canal": "grupo",
+   "estado": "no ar",
+   "nota": "Multi-tenant desde 31/08. O texto sai de `_shared/agenda.js`.",
+   "cenarios": [
+    {
+     "id": "g6-vaga",
+     "nome": "Ver as vagas",
+     "nota": "",
+     "depois": {
+      "tag": "resposta na hora",
+      "msgs": [
+       {
+        "p": "grupo",
+        "q": "Equipe",
+        "h": "09:00",
+        "t": "/agenda -vaga"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "09:00",
+        "t": "Vagas (3 turnos):\nseg 31/08 manhã: 9h, 9h30, 10h\nter 01/09 tarde: 14h30, 15h, 15h30\nqua 02/09 manhã: 8h30, 10h",
+        "f": "agenda"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "G7",
+   "nome": "/agenda -atualizar: força a leitura do sistema da clínica",
+   "canal": "grupo",
+   "estado": "no ar",
+   "nota": "",
+   "cenarios": [
+    {
+     "id": "g7-atualizar",
+     "nome": "Forçar a atualização",
+     "nota": "",
+     "depois": {
+      "tag": "resposta na hora",
+      "msgs": [
+       {
+        "p": "grupo",
+        "q": "Equipe",
+        "h": "09:05",
+        "t": "/agenda -atualizar"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "09:05",
+        "t": "📅 Agenda: 🟢 42 vagas de 180 horários lidos",
+        "f": "agenda"
+       }
+      ]
+     }
+    },
+    {
+     "id": "g7-caiu",
+     "nome": "Sistema da clínica não respondeu",
+     "nota": "A tabela não é reescrita com lista vazia: melhor agenda velha que agenda em branco.",
+     "depois": {
+      "tag": "resposta na hora",
+      "msgs": [
+       {
+        "p": "grupo",
+        "q": "Equipe",
+        "h": "09:05",
+        "t": "/agenda -atualizar"
+       },
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "09:05",
+        "t": "📅 Agenda NÃO atualizou (09:05): 🔴 o sistema da clínica não respondeu",
+        "f": "agenda"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "G8",
+   "nome": "Card com o comando pronto pra copiar",
+   "canal": "grupo",
+   "estado": "no ar",
+   "nota": "Quando a escrita automática falha, o card já vem com o comando manual preenchido. O painel 'depois' do cenário 'Sistema fora do ar' mostra isso.",
+   "ver": "F7 · erp · depois",
+   "cenarios": []
+  },
+  {
+   "id": "S1",
+   "nome": "Lead do site vira evento e aviso",
+   "canal": "grupo",
+   "estado": "no ar",
+   "nota": "O widget da landing page grava no banco e avisa o grupo do cliente.",
+   "cenarios": [
+    {
+     "id": "s1-lead",
+     "nome": "Lead do widget",
+     "nota": "",
+     "depois": {
+      "tag": "roda sozinha",
+      "msgs": [
+       {
+        "p": "grupo",
+        "q": "Júlia",
+        "h": "13:12",
+        "t": "✋🏻 Novo lead: 5538999110509",
+        "f": "widget"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "S2",
+   "nome": "Desfecho da agenda (compareceu, faltou) vira evento",
+   "canal": "silencioso",
+   "estado": "no ar",
+   "nota": "Não manda mensagem pra ninguém: grava no banco e na planilha.",
+   "cenarios": []
+  },
+  {
+   "id": "S3",
+   "nome": "Eventos de conversa (primeira mensagem, follow-up, perdido, encaminhamento)",
+   "canal": "silencioso",
+   "estado": "no ar",
+   "nota": "Não manda mensagem: os quatro só gravam.",
+   "cenarios": []
+  },
+  {
+   "id": "S4",
+   "nome": "Investimento de mídia vira evento",
+   "canal": "silencioso",
+   "estado": "no ar",
+   "nota": "Não manda mensagem.",
+   "cenarios": []
+  },
+  {
+   "id": "S5",
+   "nome": "Sincronizar a agenda de hora em hora",
+   "canal": "silencioso",
+   "estado": "no ar",
+   "nota": "Não manda mensagem. É a redundância pra quando o sistema da clínica cair.",
+   "cenarios": []
+  },
+  {
+   "id": "S6",
+   "nome": "Alertar quando o n8n ou o WhatsApp cai",
+   "canal": "grupo",
+   "estado": "no ar",
+   "nota": "O texto mora no `Ops · Alertas` e ainda não foi trazido pra cá.",
+   "cenarios": []
+  }
+ ]
+}
