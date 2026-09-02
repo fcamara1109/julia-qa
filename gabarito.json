@@ -1023,6 +1023,102 @@
           ],
           "veredito": null,
           "feedback": null
+        },
+        {
+          "data": "2026-09-02",
+          "travas": [
+            {
+              "id": "sem_manha_espontanea",
+              "ok": true,
+              "motivo": "não ofereceu manhã por conta própria"
+            },
+            {
+              "id": "freio_antes_do_horario",
+              "ok": true,
+              "motivo": "explicou o motivo e devolveu a pergunta, sem oferecer"
+            },
+            {
+              "id": "encaixe_com_humano",
+              "ok": false,
+              "motivo": "ofereceu horário de manhã em vez de tentar o encaixe"
+            }
+          ],
+          "msgs": [
+            {
+              "quem": "paciente",
+              "t": "Olá! Quero saber mais sobre a consulta com Dr. Frederico"
+            },
+            {
+              "quem": "Júlia",
+              "t": "Oi Felipe! Muito prazer, sou a Júlia, assistente do proctologista Dr Frederico ☺️\n\nComo posso te ajudar?"
+            },
+            {
+              "quem": "paciente",
+              "t": "Tem algum horario de manha, depois das 8h?"
+            },
+            {
+              "quem": "Júlia",
+              "t": "De manhã o Dr. Frederico costuma fazer exames ☺️\n\nVocê só pode no período da manhã?"
+            },
+            {
+              "quem": "paciente",
+              "t": "Sim, só consigo de manhã"
+            },
+            {
+              "quem": "Júlia",
+              "t": "Entendi! De manhã eu tenho na quarta 09/09 às 10h50 ☺️\n\nEsse horário te atende?"
+            }
+          ],
+          "veredito": null,
+          "feedback": null
+        },
+        {
+          "data": "2026-09-02",
+          "travas": [
+            {
+              "id": "sem_manha_espontanea",
+              "ok": true,
+              "motivo": "não ofereceu manhã por conta própria"
+            },
+            {
+              "id": "freio_antes_do_horario",
+              "ok": true,
+              "motivo": "explicou o motivo e devolveu a pergunta, sem oferecer"
+            },
+            {
+              "id": "encaixe_com_humano",
+              "ok": false,
+              "motivo": "ofereceu horário de manhã em vez de tentar o encaixe"
+            }
+          ],
+          "msgs": [
+            {
+              "quem": "paciente",
+              "t": "Olá! Quero saber mais sobre a consulta com Dr. Frederico"
+            },
+            {
+              "quem": "Júlia",
+              "t": "Oi Felipe! Muito prazer, sou a Júlia, assistente do proctologista Dr Frederico ☺️\n\nComo posso te ajudar?"
+            },
+            {
+              "quem": "paciente",
+              "t": "Tem algum horario de manha, depois das 8h?"
+            },
+            {
+              "quem": "Júlia",
+              "t": "De manhã o Dr costuma fazer exames ☺️\n\nVocê só pode no período da manhã mesmo?"
+            },
+            {
+              "quem": "paciente",
+              "t": "Sim, só consigo de manhã"
+            },
+            {
+              "quem": "Júlia",
+              "t": "O próximo horário seria na quarta, 09/09, às 10h50 ☺️\n\nEsse horário te atende?"
+            }
+          ],
+          "veredito": null,
+          "feedback": null
         }
       ],
       "paciente": "Felipe Teste Camara",
