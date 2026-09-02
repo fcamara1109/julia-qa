@@ -3,6 +3,15 @@
 Toda mensagem que a Júlia manda, função por função, numa página que dá pra editar. E, ao lado
 dela, **o gabarito**: como cada situação tem que terminar (`gabarito.html`).
 
+Pensando nela como uma secretária que a gente está treinando, são três etapas:
+
+1. **A página é o roteiro de atendimento** que você entrega pra ela. Você escreve como cada
+   situação tem que terminar, e é isso que vale.
+2. **O Telegram é o roleplay.** `/assert <caso>` faz ela atender de verdade, você vê a conversa
+   acontecer e diz se passou ou não.
+3. **O paciente real vem depois**, e aí ela está sozinha. Tudo que você reprovar no roleplay
+   fica escrito aqui e vira o que impede o erro de voltar.
+
 A regra que manda nas duas: **a página é o certo, a IA é que se ajusta.** Deu diferente do que
 está escrito aqui, quem muda é a IA. O gabarito só muda quando você decide que a conversa
 deveria ser outra, e aí você muda na página, de propósito.
@@ -44,6 +53,7 @@ o texto certo e confere se a mensagem de verdade diz aquilo. Mudou aqui, mudou o
 |---|---|
 | `gabarito.json` | **Como ela tem que se comportar**: um caso por situação, com as regras, a conversa aprovada, a rejeitada e o histórico das rodadas reais |
 | `gabarito.html` | A página do gabarito: escolhe o caso, toca as duas conversas lado a lado, edita as regras e salva |
+| `assert_tg.py` | O roleplay: `/assert <caso>` no Telegram faz ela atender de verdade e devolve o placar |
 | `travas.js` | As regras com nome, em JS. O mesmo arquivo roda aqui e dentro do n8n. `node travas.js` roda o autoteste |
 | `test_salvar.py` | O gabarito da página: editar, salvar, e a bateria já ler a mudança |
 | `test_gabarito.py` | O gabarito confere consigo mesmo: a conversa aprovada passa no que o próprio caso cobra, e a rejeitada quebra pelo menos uma trava |
