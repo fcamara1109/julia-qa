@@ -144,6 +144,11 @@
   @keyframes pisca{0%,60%,100%{opacity:.28} 30%{opacity:.95}}
   .vazio{margin:auto; color:var(--ink-3); font-size:13px; text-align:center; max-width:34ch}
   .nota-edicao{margin:14px 0 0; font-size:12.5px; color:var(--ink-3)}
+  .sem-conversa{
+    margin:0 0 18px; padding:12px 14px; font-size:13.5px; color:var(--ink-2);
+    background:var(--surface-2); border:1px solid var(--linha);
+    border-left:3px solid var(--linha-forte); border-radius:7px; max-width:74ch;
+  }
 
   /* ---- regras e travas ---- */
   .regras-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:20px}
@@ -211,7 +216,8 @@
 
   <section>
     <h2>O simulador <span class="dica">os dois lados andam juntos, um turno por vez</span></h2>
-    <div class="controles">
+    <p class="sem-conversa" id="sem-conversa" hidden>Este caso ainda não tem a conversa escrita, então não tem o que tocar. O que ele cobra hoje está nas travas e nas checagens, logo abaixo. A conversa aprovada nasce de dois jeitos: eu escrevo a partir do padrão (de graça), ou você aprova uma rodada real no Telegram e ela vira esta coluna. No seletor lá em cima, <b>▶</b> marca os casos que já têm.</p>
+    <div class="controles" id="controles">
       <button class="primario" id="b-rodar">▶ Rodar</button>
       <button id="b-passo">Passo a passo</button>
       <button id="b-zerar">Reiniciar</button>
@@ -233,7 +239,7 @@
         <div class="conversa" id="col-rj"></div>
       </div>
     </div>
-    <p class="nota-edicao">Clique em qualquer fala da Júlia do lado aprovado pra reescrever. É essa versão que vira o gabarito.</p>
+    <p class="nota-edicao" id="nota-edicao">Clique em qualquer fala da Júlia do lado aprovado pra reescrever. É essa versão que vira o gabarito.</p>
   </section>
 
   <section>
@@ -281,7 +287,7 @@ fetch("gabarito.json").then(r => r.json()).then(d => {
     const cs = DADOS.casos.filter(c => (c.camada || "bateria") === g);
     if (!cs.length) return "";
     return `<optgroup label="${grupos[g]} (${cs.length})">` +
-      cs.map(c => `<option value="${esc(c.id)}">${esc(c.id)} · ${esc(c.caso)}</option>`).join("") + "</optgroup>";
+      cs.map(c => `<option value="${esc(c.id)}">${c.aprovado ? "▶" : "·"} ${esc(c.id)} · ${esc(c.caso)}</option>`).join("") + "</optgroup>";
   }).join("");
   $("#quantos").textContent = `${DADOS.casos.length} casos`;
   $("#escolha").onchange = e => mostrar(e.target.value);
@@ -372,6 +378,11 @@ function simulador(c){
   $("#rj-porque").textContent = (c.rejeitado || {}).porque || "";
   passo = 0;
   const tem = total > 0;
+  // botão apagado sem explicação lê como quebrado: quando não tem conversa, some o ▶ e entra a linha
+  $("#controles").hidden = !tem;
+  $("#sem-conversa").hidden = tem;
+  $("#nota-edicao").hidden = !tem;
+  $(".painel-par").hidden = !tem;
   $("#b-rodar").disabled = !tem; $("#b-passo").disabled = !tem; $("#b-zerar").disabled = !tem;
   zerar();
 }

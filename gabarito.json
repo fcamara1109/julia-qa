@@ -15,8 +15,81 @@
         "Felipe Teste Câmara, 38 91234-0000"
       ],
       "regras": "T1 (opener genérico): saúda + roteia 'particular ou convênio?', SEM ofertar horário a frio. T2 (particular): diz o preço (R$400 cartão / R$350 pix) e oferta horário (2 dias distintos da agenda), SEM pedir dado. T3 (escolheu horário): captura pelo bloco 'Captura particular' = pede NOME COMPLETO (+telefone), NUNCA carteirinha e NUNCA cita convênio (fix baseline 14/07). T4 (dá o nome): FRASE DE SUCESSO. handoff=agendamento, tipo=particular, convenio VAZIO, valor+local=Clínica Gastrus+nome preenchidos. A FRASE DE SUCESSO tem que cravar o MESMO dia/horário que ela ofertou e o paciente escolheu (sem drift).",
-      "aprovado": null,
-      "rejeitado": null,
+      "aprovado": {
+        "de_onde": "o padrão da casa: mensagem do widget, snippets `abertura` e `sucesso`, o preço da ficha do Fred. O dia e a hora são exemplo: quem confere isso é a trava, não a letra",
+        "msgs": [
+          {
+            "quem": "paciente",
+            "t": "Olá! Quero saber mais sobre a consulta com Dr. Frederico"
+          },
+          {
+            "quem": "Júlia",
+            "t": "Oi Felipe! Muito prazer, sou a Júlia, assistente do proctologista Dr Frederico ☺️\n\nComo posso te ajudar?"
+          },
+          {
+            "quem": "paciente",
+            "t": "É particular"
+          },
+          {
+            "quem": "Júlia",
+            "t": "A consulta particular com o Dr. Frederico fica R$ 400 no cartão, em até 6x, ou R$ 350 no pix ☺️\n\nTenho quinta, 04/09, às 14h, ou sexta, 05/09, às 15h30. Algum desses te atende?"
+          },
+          {
+            "quem": "paciente",
+            "t": "Pode ser o primeiro horário que você falou"
+          },
+          {
+            "quem": "Júlia",
+            "t": "Perfeito! Pra eu deixar reservado, me passa o nome completo do paciente e um telefone de contato? ☺️"
+          },
+          {
+            "quem": "paciente",
+            "t": "Felipe Teste Câmara, 38 91234-0000"
+          },
+          {
+            "quem": "Júlia",
+            "t": "Combinado, quinta, 04/09, às 14h! Me dá só um tempinho para confirmar no sistema. Pode demorar um pouco mas te retorno aqui, tá?"
+          }
+        ]
+      },
+      "rejeitado": {
+        "porque": "pediu carteirinha num atendimento particular, e pediu o dado antes de o paciente escolher o horário",
+        "de_onde": "o erro do baseline de 14/07, que é o que este caso existe pra prender",
+        "msgs": [
+          {
+            "quem": "paciente",
+            "t": "Olá! Quero saber mais sobre a consulta com Dr. Frederico"
+          },
+          {
+            "quem": "Júlia",
+            "t": "Oi Felipe! Muito prazer, sou a Júlia, assistente do proctologista Dr Frederico ☺️\n\nComo posso te ajudar?"
+          },
+          {
+            "quem": "paciente",
+            "t": "É particular"
+          },
+          {
+            "quem": "Júlia",
+            "t": "Claro! Me manda o nome completo e uma foto da carteirinha do convênio pra eu conferir ☺️"
+          },
+          {
+            "quem": "paciente",
+            "t": "Pode ser o primeiro horário que você falou"
+          },
+          {
+            "quem": "Júlia",
+            "t": "Certo! E qual é o seu convênio?"
+          },
+          {
+            "quem": "paciente",
+            "t": "Felipe Teste Câmara, 38 91234-0000"
+          },
+          {
+            "quem": "Júlia",
+            "t": "Combinado! Me dá só um tempinho para confirmar no sistema."
+          }
+        ]
+      },
       "historico": [],
       "checagens": {
         "nao_contem": [
@@ -293,8 +366,65 @@
         "Não, não tenho convênio nem SUS"
       ],
       "regras": "No 'tá caro' NÃO revela desconto de cara: pergunta primeiro 'Você tem um pedido do SUS, ou algum convênio?' (Branch F). Como o paciente diz que NÃO tem, mantém o valor cheio (R$ 350 pix / R$ 400 cartão) e NUNCA cita os R$ 280.",
-      "aprovado": null,
-      "rejeitado": null,
+      "aprovado": {
+        "de_onde": "o padrão da casa: o preço da ficha do Fred e o Branch F (pergunta antes de revelar desconto)",
+        "msgs": [
+          {
+            "quem": "paciente",
+            "t": "Oi, quanto custa a consulta particular?"
+          },
+          {
+            "quem": "Júlia",
+            "t": "A consulta particular com o Dr. Frederico fica R$ 400 no cartão, em até 6x, ou R$ 350 no pix ☺️\n\nQuer que eu veja os horários?"
+          },
+          {
+            "quem": "paciente",
+            "t": "Nossa, tá caro. Não tem nada mais em conta não?"
+          },
+          {
+            "quem": "Júlia",
+            "t": "Entendo ☺️ Você tem um pedido do SUS, ou algum convênio?"
+          },
+          {
+            "quem": "paciente",
+            "t": "Não, não tenho convênio nem SUS"
+          },
+          {
+            "quem": "Júlia",
+            "t": "Então fica nos R$ 350 no pix, ou R$ 400 no cartão em até 6x.\n\nQuer que eu veja os horários?"
+          }
+        ]
+      },
+      "rejeitado": {
+        "porque": "entregou o desconto de graça: o paciente só reclamou do preço e ela já baixou pra R$ 280, sem perguntar se ele tinha SUS ou convênio",
+        "de_onde": "o motivo de o caso existir: desconto revelado a frio vira o preço da casa",
+        "msgs": [
+          {
+            "quem": "paciente",
+            "t": "Oi, quanto custa a consulta particular?"
+          },
+          {
+            "quem": "Júlia",
+            "t": "A consulta particular com o Dr. Frederico fica R$ 400 no cartão, em até 6x, ou R$ 350 no pix ☺️\n\nQuer que eu veja os horários?"
+          },
+          {
+            "quem": "paciente",
+            "t": "Nossa, tá caro. Não tem nada mais em conta não?"
+          },
+          {
+            "quem": "Júlia",
+            "t": "Consigo fazer por R$ 280 pra você ☺️ Quer que eu já reserve?"
+          },
+          {
+            "quem": "paciente",
+            "t": "Não, não tenho convênio nem SUS"
+          },
+          {
+            "quem": "Júlia",
+            "t": "Sem problema, o valor de R$ 280 vale do mesmo jeito. Quando você prefere?"
+          }
+        ]
+      },
       "historico": [],
       "checagens": {
         "nao_contem": [
@@ -315,8 +445,33 @@
         "Preciso muito de atendimento urgente, to com sangramento e dor forte faz dois dias, dá pra hoje?"
       ],
       "regras": "Não nega. Acolhe + 'vou chamar meu supervisor pra ver um encaixe o quanto antes'. Pergunta numa frase só o sintoma. handoff=duvida. NÃO trata como agendamento normal.",
-      "aprovado": null,
-      "rejeitado": null,
+      "aprovado": {
+        "de_onde": "o padrão da casa: snippet `urgencia` (F5), com o acolhimento e uma pergunta só",
+        "msgs": [
+          {
+            "quem": "paciente",
+            "t": "Preciso muito de atendimento urgente, to com sangramento e dor forte faz dois dias, dá pra hoje?"
+          },
+          {
+            "quem": "Júlia",
+            "t": "Sinto muito que você esteja passando por isso 🙏🏻\n\nVou chamar meu supervisor pra ver um encaixe o quanto antes. O sangramento é ao evacuar?"
+          }
+        ]
+      },
+      "rejeitado": {
+        "porque": "tratou uma urgência como agendamento normal: ofertou horário da agenda e não chamou ninguém",
+        "de_onde": "o motivo de o caso existir: urgência que entra na fila comum some",
+        "msgs": [
+          {
+            "quem": "paciente",
+            "t": "Preciso muito de atendimento urgente, to com sangramento e dor forte faz dois dias, dá pra hoje?"
+          },
+          {
+            "quem": "Júlia",
+            "t": "Hoje não tenho horário, mas consigo quinta, 04/09, às 14h. Te atende?"
+          }
+        ]
+      },
       "historico": [],
       "checagens": {
         "ultimo_handoff_tipo": "duvida"
