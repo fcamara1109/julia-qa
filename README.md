@@ -46,6 +46,7 @@ o texto certo e confere se a mensagem de verdade diz aquilo. Mudou aqui, mudou o
 | `gabarito.html` | A página do gabarito: escolhe o caso, toca as duas conversas lado a lado, edita as regras e salva |
 | `travas.js` | As regras com nome, em JS. O mesmo arquivo roda aqui e dentro do n8n. `node travas.js` roda o autoteste |
 | `test_salvar.py` | O gabarito da página: editar, salvar, e a bateria já ler a mudança |
+| `test_gabarito.py` | O gabarito confere consigo mesmo: a conversa aprovada passa no que o próprio caso cobra, e a rejeitada quebra pelo menos uma trava |
 | `fluxos.json` | A fonte da verdade: funções, cenários, mensagens |
 | `index.html` | A página que mostra e edita |
 | `prompts.html` + `prompts.json` | A outra página: a instrução do modelo e as frases prontas de cada cliente. Gabarito: `test_prompts.py` |
