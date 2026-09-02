@@ -27,9 +27,9 @@ import time
 import urllib.request
 
 AQUI = pathlib.Path(__file__).resolve().parent
+sys.path.insert(0, str(AQUI))
 sys.path.insert(0, str(AQUI.parent))
 sys.path.insert(0, str(AQUI.parent / "tools"))
-sys.path.insert(0, str(AQUI.parent / "piloto-assert"))
 
 from n8n import api, env, CTX                                               # noqa: E402
 from qa import carregar_gabarito                                            # noqa: E402

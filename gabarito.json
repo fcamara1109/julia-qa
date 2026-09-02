@@ -1,5 +1,5 @@
 {
-  "_meta": "O gabarito da Júlia: um caso por situação, e um lugar só pra escrever o que é certo. A página escreve, o Telegram cobra no n8n de verdade, a bateria roda em lote. Veio de fred/state/n8n/julia/test-scenarios.json em 01/09/2026. `travas` são as regras com nome, que rodam como código (travas.js); `checagens` é o assert declarativo antigo, que o qa_assert interpreta.",
+  "_meta": "O gabarito da Júlia: um caso por situação, e um lugar só pra escrever o que é certo. A página escreve, o Telegram cobra no n8n de verdade, a bateria roda em lote. Veio dos cenários do Fred em 01/09/2026 (arquivados em Archive/doctors-fred-qa-v1/). `travas` são as regras com nome, que rodam como código (travas.js); `checagens` é o assert declarativo antigo, que o qa_assert interpreta.",
   "casos": [
     {
       "id": "S1",
