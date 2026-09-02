@@ -1,6 +1,11 @@
 # O que a Júlia escreve
 
-Toda mensagem que a Júlia manda, função por função, numa página que dá pra editar.
+Toda mensagem que a Júlia manda, função por função, numa página que dá pra editar. E, ao lado
+dela, **o gabarito**: como cada situação tem que terminar (`gabarito.html`).
+
+A regra que manda nas duas: **a página é o certo, a IA é que se ajusta.** Deu diferente do que
+está escrito aqui, quem muda é a IA. O gabarito só muda quando você decide que a conversa
+deveria ser outra, e aí você muda na página, de propósito.
 
 É o controle de qualidade do projeto: o texto certo mora aqui, e o código é cobrado contra ele.
 Quem quiser mudar o que a Júlia fala não abre o n8n nem o Python: abre a página, escreve como
@@ -37,6 +42,10 @@ o texto certo e confere se a mensagem de verdade diz aquilo. Mudou aqui, mudou o
 
 | Arquivo | O quê |
 |---|---|
+| `gabarito.json` | **Como ela tem que se comportar**: um caso por situação, com as regras, a conversa aprovada, a rejeitada e o histórico das rodadas reais |
+| `gabarito.html` | A página do gabarito: escolhe o caso, toca as duas conversas lado a lado, edita as regras e salva |
+| `travas.js` | As regras com nome, em JS. O mesmo arquivo roda aqui e dentro do n8n. `node travas.js` roda o autoteste |
+| `test_salvar.py` | O gabarito da página: editar, salvar, e a bateria já ler a mudança |
 | `fluxos.json` | A fonte da verdade: funções, cenários, mensagens |
 | `index.html` | A página que mostra e edita |
 | `prompts.html` + `prompts.json` | A outra página: a instrução do modelo e as frases prontas de cada cliente. Gabarito: `test_prompts.py` |
