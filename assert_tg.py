@@ -5,7 +5,8 @@ O caso roda na Júlia de verdade, a conversa acontece no bot do paciente como um
 normal, e o grupo recebe o placar das travas do lado do que está aprovado na página. Você lê no
 celular e me diz aqui se passou; eu gravo com `--veredito`.
 
-    python3 _shared/qa/assert_tg.py manha              # toca o caso
+    python3 _shared/qa/assert_tg.py manha              # toca o caso no fluxo multi-tenant
+    python3 _shared/qa/assert_tg.py S1 --fluxo julia_v1 # toca na Júlia antiga do Fred
     python3 _shared/qa/assert_tg.py --lista            # os casos que dá pra tocar
     python3 _shared/qa/assert_tg.py --veredito "nao ofereceu horário sem perguntar"
 
@@ -74,12 +75,12 @@ def lista():
 
 
 # --------------------------------------------------------------------- rodar
-def rodar(cid, chat_pac="", chat_gru=""):
+def rodar(cid, fluxo="core", chat_pac="", chat_gru=""):
     c = casos().get(cid)
     if not c:
         manda("grupo", chat_gru, f"Não conheço o caso '{cid}'. /assert mostra a lista.")
         return
-    R.usa_fluxo("core")
+    R.usa_fluxo(fluxo)
     base, key = R.load_creds()
     nonce = str(int(time.time()))[-6:]
     chatid = f"{R.CHATID_PREFIX}{nonce}@s.whatsapp.net"
@@ -88,8 +89,9 @@ def rodar(cid, chat_pac="", chat_gru=""):
         f"{base}/api/v1/executions?workflowId={R.WORKFLOW_ID}&limit=1", key).get("data", [])),
         default=0)
 
-    manda("grupo", chat_gru, f"🧪 {c['id']}: {c['caso']}\n\nTocando agora, {len(c['turns'])} "
-                             f"turnos. A conversa sai no bot do paciente.")
+    qual = "multi-tenant (Core · Atendente)" if fluxo == "core" else "Júlia V1 (só do Fred)"
+    manda("grupo", chat_gru, f"🧪 {c['id']}: {c['caso']}\n\nFluxo: {qual}. Tocando agora, "
+                             f"{len(c['turns'])} turnos. A conversa sai no bot do paciente.")
     turnos, skip = [], set()
     for n, fala in enumerate(c["turns"], 1):
         # a fala do paciente é ecoada: sem ela você vê só o lado dela, meia conversa
@@ -122,7 +124,7 @@ def rodar(cid, chat_pac="", chat_gru=""):
     manda("grupo", chat_gru,
           f"🧪 {c['id']}\n\nAS TRAVAS:\n{placar}\n\n" +
           (f"O QUE ESTÁ APROVADO NA PÁGINA:\n\n{como_texto(ap)}\n\n" if ap else "") +
-          "❓ Aprovado ou reprovado? Responde aqui com /assert ok ... ou /assert nao ...")
+          "❓ Aprovado ou reprovado? Manda o print e o que achou pro Claude.")
     print(f"{c['id']}: {sum(1 for _, o, _ in veredito if o is False)} trava(s) quebrada(s)")
 
 
@@ -160,13 +162,15 @@ def main():
     ap.add_argument("caso", nargs="?", help="o id do caso a tocar")
     ap.add_argument("--lista", action="store_true")
     ap.add_argument("--veredito", help="'ok ...' ou 'nao ...' pra última rodada")
+    ap.add_argument("--fluxo", choices=["core", "julia_v1"], default="core",
+                    help="core = o multi-tenant (default); julia_v1 = a Júlia antiga do Fred")
     a = ap.parse_args()
     if a.lista:
         print(lista())
     elif a.veredito:
         veredito(a.veredito)
     elif a.caso:
-        rodar(a.caso)
+        rodar(a.caso, a.fluxo)
     else:
         ap.print_help()
 

@@ -90,7 +90,88 @@
           }
         ]
       },
-      "historico": [],
+      "historico": [
+        {
+          "data": "2026-09-02",
+          "travas": [],
+          "msgs": [
+            {
+              "quem": "paciente",
+              "t": "Olá! Quero saber mais sobre a consulta com Dr. Frederico"
+            },
+            {
+              "quem": "Júlia",
+              "t": "Oi Felipe! Muito prazer, sou a Júlia, assistente do proctologista Dr Frederico ☺️\n\nComo posso te ajudar?"
+            },
+            {
+              "quem": "paciente",
+              "t": "É particular"
+            },
+            {
+              "quem": "Júlia",
+              "t": "A consulta com o Dr Frederico é R$ 400,00 em até 6x no cartão, ou R$ 350,00 no pix ou dinheiro."
+            },
+            {
+              "quem": "paciente",
+              "t": "Pode ser o primeiro horário que você falou"
+            },
+            {
+              "quem": "Júlia",
+              "t": "Os próximos horários seriam amanhã (quinta 03/09) às 16h30 ou segunda (07/09) às 15h. Algum desses te atende?"
+            },
+            {
+              "quem": "paciente",
+              "t": "Felipe Teste Câmara, 38 91234-0000"
+            },
+            {
+              "quem": "Júlia",
+              "t": "Me confirma se entendi certo:\n- Consulta com Dr. Frederico na Clínica Gastrus, em Montes Claros\n- Quinta 03/09 às 16h30\n- Paciente: Felipe Teste Câmara | 5538911395426\n- Particular, R$ 400 à prazo ou R$ 350 à vista"
+            }
+          ],
+          "veredito": null,
+          "feedback": null
+        },
+        {
+          "data": "2026-09-02",
+          "travas": [],
+          "msgs": [
+            {
+              "quem": "paciente",
+              "t": "Olá! Quero saber mais sobre a consulta com Dr. Frederico"
+            },
+            {
+              "quem": "Júlia",
+              "t": "Oi Felipe! Muito prazer, sou a Júlia, assistente do proctologista Dr Frederico ☺️\n\nÉ pra consulta particular ou por convênio? ☺️"
+            },
+            {
+              "quem": "paciente",
+              "t": "É particular"
+            },
+            {
+              "quem": "Júlia",
+              "t": "A consulta com o Dr Frederico é R$ 400 em até 6x no cartão, ou R$ 350 no pix ou dinheiro.\n\nOs próximos horários seriam quinta 03/09 às 16h30 ou segunda 07/09 às 15h. Algum desses te atende? ☺️"
+            },
+            {
+              "quem": "paciente",
+              "t": "Pode ser o primeiro horário que você falou"
+            },
+            {
+              "quem": "Júlia",
+              "t": "Perfeito! Pra fechar esse horário, me confirma o nome completo do paciente? Se puder, o telefone também ☺️"
+            },
+            {
+              "quem": "paciente",
+              "t": "Felipe Teste Câmara, 38 91234-0000"
+            },
+            {
+              "quem": "Júlia",
+              "t": "Combinado! Me dá só alguns minutos para confirmar no sistema. Demora um pouco mas te retorno aqui daqui a pouco, tá?"
+            }
+          ],
+          "veredito": null,
+          "feedback": null
+        }
+      ],
       "checagens": {
         "nao_contem": [
           "carteirinha",
