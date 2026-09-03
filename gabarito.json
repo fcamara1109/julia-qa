@@ -1168,7 +1168,7 @@
         "agenda": "qualquer_vaga"
       },
       "turns": [
-        "🔴 Olá! Quero saber mais sobre a consulta com Dr. Frederico",
+        "Olá! Quero saber mais sobre a consulta com Dr. Frederico",
         "tenho unimed",
         "Quero sim, me ve um horario",
         "Pode ser o primeiro horario que voce falou",
@@ -1316,7 +1316,7 @@
         "agenda": "vaga_amanha"
       },
       "turns": [
-        "🔴 Olá! Quero saber mais sobre a consulta com Dr. Frederico",
+        "Olá! Quero saber mais sobre a consulta com Dr. Frederico",
         "Qual o valor da consulta?\n\nparticular",
         "Amanhã ás 16h"
       ],
