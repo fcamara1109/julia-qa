@@ -1,19 +1,13 @@
 #!/usr/bin/env python3
-"""assert_tg.py — o ▶ da página, tocado pelo Telegram.
+"""assert_tg.py — o roleplay: um caso do gabarito, atendido de verdade, no Telegram.
 
-Você digita `/assert manha` no sandbox (em qualquer um dos dois bots). O caso roda na Júlia de
-verdade, a conversa acontece no bot do paciente como um atendimento normal, e o grupo recebe o
-placar das travas do lado do que está aprovado na página, com a pergunta. O que você responder
-(`/assert ok ...` ou `/assert nao ...`) vira o histórico do caso.
+O caso roda na Júlia de verdade, a conversa acontece no bot do paciente como um atendimento
+normal, e o grupo recebe o placar das travas do lado do que está aprovado na página. Você lê no
+celular e me diz aqui se passou; eu gravo com `--veredito`.
 
-    python3 _shared/qa/assert_tg.py --escutar     # fica ouvindo os /assert do Telegram
-    python3 _shared/qa/assert_tg.py manha         # toca um caso sem passar pelo Telegram
-    python3 _shared/qa/assert_tg.py --lista       # a lista, no terminal
-
-Por que o miolo mora aqui e não no n8n: pra julgar é preciso ler o que a Júlia respondeu, e
-isso sai da execução, pela API. Quem já sabe fazer isso é o runner da bateria. Refazer isso
-dentro do fluxo seria a mesma regra escrita duas vezes, que é o que este projeto existe pra
-matar. O n8n só registra o pedido; ele fica na execução e este programa lê de lá.
+    python3 _shared/qa/assert_tg.py manha              # toca o caso
+    python3 _shared/qa/assert_tg.py --lista            # os casos que dá pra tocar
+    python3 _shared/qa/assert_tg.py --veredito "nao ofereceu horário sem perguntar"
 
 Custo: uma conversa por caso, centavos de Gemini. Nenhuma mensagem sai pra telefone: o payload
 carimba a instância `qa` e manda o destino do sandbox junto (regra 8).
@@ -31,15 +25,13 @@ sys.path.insert(0, str(AQUI))
 sys.path.insert(0, str(AQUI.parent))
 sys.path.insert(0, str(AQUI.parent / "tools"))
 
-from n8n import api, env, CTX                                               # noqa: E402
+from n8n import CTX                                                         # noqa: E402
 from qa import carregar_gabarito                                            # noqa: E402
 from travas import julgar                                                   # noqa: E402
 from telegram_qa import TG_FELIPE, url as tg_url                            # noqa: E402
 import qa_runner as R                                                       # noqa: E402
 
 GABARITO = AQUI / "gabarito.json"
-FLUXO = "Sandbox · Telegram"
-VISTO = AQUI / ".visto.json"          # até onde já li as execuções do sandbox
 SIM = ("ok", "sim", "aprovado", "bom")
 NAO = ("nao", "não", "reprovado", "ruim")
 
@@ -71,15 +63,13 @@ def salvar(caso):
     GABARITO.write_text(json.dumps(d, ensure_ascii=False, indent=2) + "\n")
 
 
-def lista(so_bateria=True):
+def lista():
     L = ["Os casos do gabarito:"]
     for c in casos().values():
-        if so_bateria and (c.get("camada") or "bateria") != "bateria":
-            continue
         h = (c.get("historico") or [{}])[-1]
         marca = {"aprovado": "🟢", "reprovado": "🔴"}.get(h.get("veredito"), "·")
         L.append(f"{marca} {c['id']} — {c['caso'][:58]}")
-    L.append("\n/assert <id> pra tocar. Os outros 36 casos não custam Gemini: são teste de código.")
+    L.append("\nassert_tg.py <id> pra tocar. Os outros casos não custam Gemini: são teste de código.")
     return "\n".join(L)
 
 
@@ -165,71 +155,12 @@ def veredito(pedido, chat_gru=""):
     print(f"{c['id']}: {ult['veredito']}")
 
 
-# --------------------------------------------------------------------- escutar
-def fluxo_id():
-    return [w for w in api("/workflows?limit=100")["data"] if w["name"] == FLUXO][0]["id"]
-
-
-def pedidos(wid, desde):
-    """Os /assert que apareceram nas execuções do sandbox depois de `desde`."""
-    ids = sorted(int(e["id"]) for e in
-                 api(f"/executions?workflowId={wid}&limit=30").get("data", []))
-    saida, ultimo = [], desde
-    for exid in [i for i in ids if i > desde]:
-        ultimo = max(ultimo, exid)
-        try:
-            d = api(f"/executions/{exid}?includeData=true")
-        except Exception:
-            continue
-        try:
-            j = d["data"]["resultData"]["runData"]["Decidir"][0]["data"]["main"][0][0]["json"]
-        except Exception:
-            continue
-        if j.get("assert_pedido"):
-            e = json.loads(j.get("estado") or "{}")
-            saida.append((j["assert_pedido"], e.get("paciente", ""), e.get("grupo", "")))
-    return saida, ultimo
-
-
-def escutar(intervalo=15):
-    wid = fluxo_id()
-    visto = json.loads(VISTO.read_text()).get("execucao", 0) if VISTO.is_file() else 0
-    if not visto:   # na primeira vez começa de agora: pedido velho não é pedido
-        visto = max((int(e["id"]) for e in
-                     api(f"/executions?workflowId={wid}&limit=1").get("data", [])), default=0)
-        VISTO.write_text(json.dumps({"execucao": visto}) + "\n")
-    print(f"ouvindo os /assert do sandbox (execução {visto} pra frente). ctrl+c pra parar.")
-    while True:
-        try:
-            novos, visto = pedidos(wid, visto)
-            VISTO.write_text(json.dumps({"execucao": visto}) + "\n")
-            for pedido, pac, gru in novos:
-                print(f"→ /assert {pedido}")
-                agir(pedido, pac, gru)
-        except Exception as e:
-            print("erro no ciclo:", e)
-        time.sleep(intervalo)
-
-
-def agir(pedido, chat_pac="", chat_gru=""):
-    v = pedido.split()[0].lower() if pedido.split() else ""
-    if pedido == "(lista)" or not pedido:
-        manda("grupo", chat_gru, lista())
-    elif v in SIM or v in NAO:
-        veredito(pedido, chat_gru)
-    else:
-        rodar(v, chat_pac, chat_gru)
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("caso", nargs="?", help="o id do caso a tocar")
-    ap.add_argument("--escutar", action="store_true", help="fica ouvindo o Telegram")
     ap.add_argument("--lista", action="store_true")
     ap.add_argument("--veredito", help="'ok ...' ou 'nao ...' pra última rodada")
     a = ap.parse_args()
-    if a.escutar:
-        return escutar()
     if a.lista:
         print(lista())
     elif a.veredito:
